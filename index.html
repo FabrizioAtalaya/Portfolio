@@ -233,6 +233,7 @@
                 <div class="relative z-10 flex flex-col items-center max-w-4xl">
                     <div class="flex items-center gap-4 mb-6 reveal-on-scroll">
                         <div class="h-[1px] w-12 bg-gray-600"></div>
+                        <!-- CARGO ACTUALIZADO -->
                         <span class="text-[var(--accent)] text-xs font-bold tracking-[0.3em] uppercase">Post-Productor</span>
                         <div class="h-[1px] w-12 bg-gray-600"></div>
                     </div>
@@ -249,6 +250,7 @@
                                 <span class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-black">
                                     <i class="fas fa-play text-[10px] ml-0.5"></i>
                                 </span>
+                                <!-- BOTÓN ACTUALIZADO -->
                                 <span class="text-xs font-bold tracking-[0.2em] uppercase text-white group-hover:text-black">Ver Showreel 2026</span>
                             </div>
                         </a>
@@ -277,7 +279,7 @@
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- ITEMS DE PORTAFOLIO (TODOS LLEVAN AL VIDEO POR AHORA) -->
+                    <!-- ITEMS DE PORTAFOLIO -->
                     <div onclick="switchPage('project')" class="portfolio-item motion corp block group relative overflow-hidden aspect-video bg-[#111]">
                         <img src="https://images.unsplash.com/photo-1604871000636-074fa5117945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover transition duration-700">
                         <div class="project-overlay absolute inset-0 flex flex-col justify-end p-6">
@@ -318,7 +320,7 @@
         </div>
 
         <!-- ========================================== -->
-        <!-- PÁGINA 2: DETALLE DE PROYECTO (CON VIDEO) -->
+        <!-- PÁGINA 2: DETALLE DE PROYECTO (CON VIDEO Y TÍTULO CORREGIDO) -->
         <!-- ========================================== -->
         <div id="page-project" class="page-section">
             <div class="fixed top-28 left-6 md:left-12 z-40">
@@ -328,7 +330,7 @@
                 </button>
             </div>
             <article class="pt-40 pb-24 container mx-auto px-6 md:px-12">
-                <!-- VIDEO DE YOUTUBE INTEGRADO -->
+                <!-- VIDEO DE YOUTUBE -->
                 <div class="w-full aspect-video bg-[#111] border border-gray-900 mb-12 overflow-hidden relative reveal-on-scroll">
                     <iframe class="w-full h-full object-cover" 
                             src="https://www.youtube.com/embed/2ntPC4qcaR0?rel=0&modestbranding=1" 
@@ -341,7 +343,7 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-24">
                     <div class="md:col-span-4">
-                        <!-- CAMBIO REALIZADO: TÍTULO PERSONALIZADO -->
+                        <!-- TÍTULO CORREGIDO: FABRIZIO ATALAYA -->
                         <h1 class="text-4xl md:text-6xl font-bold text-white heading-font mb-6">FABRIZIO <br> <span class="text-gray-700">ATALAYA</span></h1>
                         <div class="space-y-4 text-xs font-mono border-t border-gray-800 pt-6">
                             <div class="flex justify-between">
@@ -371,6 +373,7 @@
                         </p>
                     </div>
                 </div>
+                <!-- ... resto de piezas ... -->
                 <div class="border-t border-gray-900 pt-12">
                     <h4 class="text-[var(--accent)] text-xs font-bold tracking-[0.3em] uppercase mb-8">Piezas del Proyecto</h4>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -409,7 +412,7 @@
             </header>
             <main class="pb-32 container mx-auto px-6 md:px-12">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <!-- ... cards de servicios (igual que antes) ... -->
+                    <!-- ... cards de servicios ... -->
                     <div class="service-card p-10 reveal-on-scroll" style="transition-delay: 300ms;">
                         <div class="service-icon"><i class="fas fa-film"></i></div>
                         <h3 class="text-2xl font-bold text-white mb-2 heading-font">Motion & Video</h3>
@@ -456,7 +459,7 @@
         </div>
 
         <!-- ========================================== -->
-        <!-- PÁGINA 4: SOBRE MÍ (NUEVA) -->
+        <!-- PÁGINA 4: SOBRE MÍ -->
         <!-- ========================================== -->
         <div id="page-about" class="page-section">
             <div class="fixed top-28 left-6 md:left-12 z-40">
@@ -533,7 +536,6 @@
                     <!-- ... resto del texto de privacidad ... -->
                     <section>
                         <h3 class="text-white font-bold text-lg mb-4">5. Contacto</h3>
-                        <!-- EMAIL CORREGIDO AQUÍ TAMBIÉN -->
                         <p>Si tienes preguntas sobre esta política, puedes escribirme directamente a: <a href="mailto:atalayatanantafabrizio@gmail.com" class="text-white hover:text-[var(--accent)] transition">atalayatanantafabrizio@gmail.com</a></p>
                     </section>
                 </div>
@@ -548,7 +550,6 @@
             <div class="flex flex-col md:flex-row justify-between items-start gap-16 mb-24">
                 <div class="md:w-1/2">
                     <p class="text-[var(--accent)] text-xs font-bold tracking-[0.3em] uppercase mb-8">Iniciar Conversación</p>
-                    <!-- EMAIL CORREGIDO CON 'Z' -->
                     <a href="mailto:atalayatanantafabrizio@gmail.com" class="block text-3xl md:text-5xl font-bold heading-font text-white hover:text-gray-400 transition leading-tight mb-8">
                         atalayatanantafabrizio<br>@gmail.com
                     </a>
@@ -563,7 +564,6 @@
                     <button onclick="navigateToReel()" class="text-left hover:text-[var(--accent)] transition uppercase">Reel</button>
                     <button onclick="navigateToWork()" class="text-left hover:text-[var(--accent)] transition uppercase">Proyectos</button>
                     <button onclick="switchPage('services')" class="text-left hover:text-[var(--accent)] transition uppercase">Servicios</button>
-                    <!-- ENLACE SOBRE MÍ CORREGIDO Y EN MAYÚSCULAS -->
                     <button onclick="switchPage('about')" class="text-left hover:text-[var(--accent)] transition uppercase">SOBRE MÍ</button>
                 </div>
             </div>
