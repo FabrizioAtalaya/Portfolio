@@ -46,7 +46,6 @@
         }
         #transition-overlay.active { transform: translateY(0%); pointer-events: all; }
         #transition-overlay.exit { transform: translateY(-100%); }
-        .no-transition, .no-transition * { transition: none !important; }
 
         .transition-brand {
             font-family: 'Oswald', sans-serif; font-size: 5rem; font-weight: 900; color: black;
@@ -55,7 +54,7 @@
         }
         #transition-overlay.active .transition-brand { opacity: 1; transform: translateY(0) scale(1); }
 
-        /* --- ANIMACIÓN BOTÓN SHOWREEL --- */
+        /* --- ANIMACIÓN BOTÓN SHOWREEL (RESTAURADA) --- */
         .reel-btn-container { position: relative; display: inline-flex; align-items: center; justify-content: center; }
         .reel-btn-pulse {
             position: absolute; width: 100%; height: 100%; border-radius: 9999px;
@@ -66,45 +65,34 @@
 
         /* LOGICA DE PÁGINAS */
         .page-section { display: none; opacity: 0; }
-        .page-section.active-page { display: block; animation: fadeInPage 1s cubic-bezier(0.65, 0, 0.35, 1) forwards; }
+        .page-section.active-page { display: block; animation: fadeInPage 0.8s cubic-bezier(0.65, 0, 0.35, 1) forwards; }
         @keyframes fadeInPage { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
         /* ANIMACIÓN DE REVELADO */
         .reveal { opacity: 0; transform: translateY(40px); transition: all 1s cubic-bezier(0.215, 0.61, 0.355, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* Cursor personalizado */
+        /* Cursor Custom */
         .custom-cursor {
             width: 20px; height: 20px; border: 1px solid white; border-radius: 50%;
             position: fixed; pointer-events: none; z-index: 9999;
             transform: translate(-50%, -50%); transition: width 0.3s, height 0.3s, background-color 0.3s; mix-blend-mode: difference;
         }
-        body:hover .custom-cursor { background-color: white; width: 10px; height: 10px; }
 
         /* Navbar */
         nav.scrolled { background-color: rgba(5, 5, 5, 0.95); padding: 1rem 2rem; backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05); }
 
-        /* --- INTERACTIVIDAD DE CUADROS (B&W A COLOR) --- */
-        .portfolio-item { 
-            cursor: pointer; 
-            overflow: hidden;
-            position: relative;
-            background-color: #000;
-        }
+        /* Portafolio Interactivo */
+        .portfolio-item { cursor: pointer; overflow: hidden; position: relative; background-color: #000; }
         .portfolio-item img {
             transition: all 0.8s cubic-bezier(0.215, 0.61, 0.355, 1);
-            filter: grayscale(100%);
-            opacity: 0.4;
+            filter: grayscale(100%); opacity: 0.4;
         }
-        .portfolio-item:hover img { 
-            transform: scale(1.05); 
-            filter: grayscale(0%);
-            opacity: 1;
-        }
+        .portfolio-item:hover img { transform: scale(1.05); filter: grayscale(0%); opacity: 1; }
         .project-overlay { 
+            position: absolute; inset: 0;
             background: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 60%, rgba(0,0,0,0) 100%); 
-            opacity: 1; 
-            transition: opacity 0.4s ease;
+            display: flex; flex-direction: column; justify-content: end; padding: 2rem;
         }
 
         /* Asset Frames */
@@ -113,40 +101,22 @@
             transition: all 0.3s ease; display: flex; align-items: center; justify-content: center;
         }
         .asset-frame:hover { border-color: var(--accent); background-color: #0f0f0f; }
-        .asset-label {
-            position: absolute; bottom: 10px; left: 10px; font-size: 9px;
-            text-transform: uppercase; letter-spacing: 0.1em; color: #444; font-weight: bold;
-        }
+        .asset-label { position: absolute; bottom: 10px; left: 10px; font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; color: #444; font-weight: bold; }
         .asset-icon { font-size: 1.5rem; color: #222; transition: color 0.3s ease; }
-        .asset-frame:hover .asset-icon { color: var(--accent); }
 
-        .section-tag {
-            font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.3em;
-            color: var(--accent); margin-bottom: 2rem; display: flex; align-items: center; gap: 1rem;
-        }
-        .section-tag::after { content: ''; height: 1px; flex-grow: 1; background: rgba(255,255,255,0.05); }
-
-        /* Info Profesional Grid */
+        /* Grid Info */
         .info-grid {
             display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;
             border-top: 1px solid rgba(255,255,255,0.05); padding-top: 2rem; margin-top: 2rem;
         }
         .info-item { display: flex; flex-direction: column; gap: 0.25rem; }
         .info-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.2em; color: #555; font-weight: 800; }
-        .info-value { font-size: 13px; color: #ccc; font-weight: 400; }
+        .info-value { font-size: 13px; color: #ccc; }
 
         /* Modal */
-        #quote-modal {
-            position: fixed; inset: 0; z-index: 1000;
-            display: none; align-items: center; justify-content: center;
-            background-color: rgba(0,0,0,0.9); backdrop-filter: blur(10px);
-        }
+        #quote-modal { position: fixed; inset: 0; z-index: 1000; display: none; align-items: center; justify-content: center; background-color: rgba(0,0,0,0.9); backdrop-filter: blur(10px); }
         #quote-modal.active { display: flex; }
-
-        .form-input {
-            width: 100%; background-color: #050505; border: 1px solid #333;
-            padding: 12px 16px; color: white; font-size: 0.9rem; outline: none;
-        }
+        .form-input { width: 100%; background-color: #050505; border: 1px solid #333; padding: 12px 16px; color: white; outline: none; }
         .form-input:focus { border-color: var(--accent); }
 
         @media (max-width: 768px) { .transition-brand { font-size: 3rem; } }
@@ -155,17 +125,15 @@
 <body>
 
     <!-- TRANSICIÓN -->
-    <div id="transition-overlay">
-        <div class="transition-brand">FABRIZIO ATALAYA</div>
-    </div>
+    <div id="transition-overlay"><div class="transition-brand">FABRIZIO ATALAYA</div></div>
 
-    <!-- MODAL DE COTIZACIÓN -->
+    <!-- MODAL COTIZACIÓN -->
     <div id="quote-modal">
         <div class="absolute inset-0" onclick="closeModal()"></div>
         <div class="modal-box w-full max-w-lg bg-[#111] border border-gray-800 p-8 md:p-10 relative z-10 shadow-2xl">
             <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-500 hover:text-white transition text-xl"><i class="fas fa-times"></i></button>
-            <h2 class="text-3xl font-bold text-white heading-font mb-2 text-left">Iniciar <span class="text-[var(--accent)]">Proyecto</span></h2>
-            <form onsubmit="submitForm(event)" class="space-y-4 text-left">
+            <h2 class="text-3xl font-bold text-white heading-font mb-2">Iniciar <span class="text-[var(--accent)]">Proyecto</span></h2>
+            <form onsubmit="submitForm(event)" class="space-y-4">
                 <input type="text" id="form-name" required class="form-input" placeholder="Nombre completo">
                 <input type="email" id="form-email" required class="form-input" placeholder="Email">
                 <select id="form-service" class="form-input">
@@ -180,7 +148,7 @@
 
     <div id="cursor" class="custom-cursor hidden md:block"></div>
 
-    <!-- NAV -->
+    <!-- NAVEGACIÓN -->
     <nav class="fixed top-0 w-full z-50 px-6 md:px-12 py-8 flex justify-between items-center transition-all duration-300">
         <div onclick="switchPage('home')" class="cursor-pointer text-xl font-bold tracking-widest heading-font z-50 uppercase">
             F<span class="text-[var(--accent)]">.</span>Atalaya
@@ -195,11 +163,11 @@
 
     <div id="main-content">
 
-        <!-- HOME -->
+        <!-- PÁGINA: INICIO -->
         <div id="page-home" class="page-section active-page text-center">
             <header class="relative w-full h-screen flex flex-col justify-center items-center text-center px-4 overflow-hidden">
                 <div class="absolute inset-0 z-0">
-                     <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2000&auto=format&fit=crop" class="w-full h-full object-cover opacity-20">
+                     <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2000&auto=format&fit=crop" class="w-full h-full object-cover opacity-20" alt="Background">
                      <div class="absolute inset-0 bg-gradient-to-b from-[#050505] via-transparent to-[#050505]"></div>
                 </div>
                 <div class="relative z-10">
@@ -209,9 +177,7 @@
                         <div class="reel-btn-pulse"></div>
                         <div class="reel-btn-pulse" style="animation-delay: 0.5s"></div>
                         <div class="relative bg-black/40 backdrop-blur-md border border-white/20 px-10 py-5 rounded-full flex items-center gap-4 transition-all duration-300 group-hover:bg-[var(--accent)] group-hover:border-[var(--accent)] group-hover:scale-105">
-                            <span class="w-6 h-6 rounded-full bg-white flex items-center justify-center text-black">
-                                <i class="fas fa-play text-[8px] ml-0.5"></i>
-                            </span>
+                            <span class="w-6 h-6 rounded-full bg-white flex items-center justify-center text-black"><i class="fas fa-play text-[8px] ml-0.5"></i></span>
                             <span class="text-xs font-bold tracking-[0.2em] uppercase text-white group-hover:text-black">Ver Showreel 2026</span>
                         </div>
                     </a>
@@ -227,236 +193,269 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <!-- 1. GRUPO CREDCO -->
                     <div onclick="switchPage('project-credco')" class="portfolio-item group md:row-span-2 block group relative overflow-hidden aspect-[4/5] bg-[#111] reveal">
-                        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop" class="w-full h-full object-cover">
-                        <div class="project-overlay absolute inset-0 flex flex-col justify-end p-8 text-left">
+                        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200" class="w-full h-full object-cover">
+                        <div class="project-overlay">
                             <span class="text-[var(--accent)] text-[10px] font-bold uppercase mb-2 tracking-[0.3em]">Ingeniería & Arquitectura</span>
-                            <h3 class="text-2xl md:text-3xl font-bold text-white heading-font uppercase leading-none">Grupo Credco</h3>
+                            <h3 class="text-2xl md:text-3xl font-bold text-white heading-font uppercase">Grupo Credco</h3>
                             <p class="text-gray-400 text-[10px] font-bold uppercase mt-4 border-t border-white/10 pt-4 w-fit">In-House / 2023 - 2025</p>
                         </div>
                     </div>
 
+                    <!-- 2. REDSATEL -->
                     <div onclick="switchPage('project-redsatel')" class="portfolio-item group block relative overflow-hidden aspect-video bg-[#111] reveal">
-                        <img src="https://images.unsplash.com/photo-1580674285054-bed31e145f59?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover">
-                        <div class="project-overlay absolute inset-0 flex flex-col justify-end p-6 text-left">
-                            <span class="text-[var(--accent)] text-[10px] font-bold uppercase mb-1 tracking-widest uppercase">Tecnología GPS</span>
+                        <img src="https://images.unsplash.com/photo-1580674285054-bed31e145f59?q=80&w=800" class="w-full h-full object-cover">
+                        <div class="project-overlay">
+                            <span class="text-[var(--accent)] text-[10px] font-bold uppercase mb-1 tracking-widest">Tecnología GPS</span>
                             <h3 class="text-xl font-bold text-white heading-font uppercase">RedSatel Perú</h3>
                         </div>
                     </div>
 
+                    <!-- 3. SPEEDY GROUP -->
                     <div onclick="switchPage('project-speedy')" class="portfolio-item group block relative overflow-hidden aspect-video bg-[#111] reveal">
-                        <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover">
-                        <div class="project-overlay absolute inset-0 flex flex-col justify-end p-6 text-left">
-                            <span class="text-[var(--accent)] text-[10px] font-bold uppercase mb-1 tracking-widest uppercase">TV Nacional</span>
-                            <h3 class="text-xl font-bold text-white heading-font uppercase uppercase">Speedy Group</h3>
+                        <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=800" class="w-full h-full object-cover">
+                        <div class="project-overlay">
+                            <span class="text-[var(--accent)] text-[10px] font-bold uppercase mb-1 tracking-widest">TV Nacional</span>
+                            <h3 class="text-xl font-bold text-white heading-font uppercase">Speedy Group</h3>
                         </div>
                     </div>
 
+                    <!-- 4. GEOSATELITAL -->
                     <div onclick="switchPage('project-geosatelital')" class="portfolio-item group block relative overflow-hidden aspect-video bg-[#111] reveal">
-                        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover">
-                        <div class="project-overlay absolute inset-0 flex flex-col justify-end p-6 text-left">
-                            <span class="text-[var(--accent)] text-[10px] font-bold uppercase mb-1 tracking-widest uppercase">Soporte Freelance</span>
-                            <h3 class="text-xl font-bold text-white heading-font uppercase uppercase">GeoSatelital</h3>
+                        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800" class="w-full h-full object-cover">
+                        <div class="project-overlay">
+                            <span class="text-[var(--accent)] text-[10px] font-bold uppercase mb-1 tracking-widest">Soporte Freelance</span>
+                            <h3 class="text-xl font-bold text-white heading-font uppercase">GeoSatelital</h3>
+                        </div>
+                    </div>
+
+                    <!-- 5. FREELANCE HUB (ENTRADA) -->
+                    <div onclick="switchPage('project-freelance')" class="portfolio-item group block relative overflow-hidden aspect-video bg-[#111] reveal">
+                        <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=1200" class="w-full h-full object-cover">
+                        <div class="project-overlay">
+                            <span class="text-[var(--accent)] text-[10px] font-bold uppercase mb-1 tracking-widest">Corporativo & Retail</span>
+                            <h3 class="text-2xl font-bold text-white heading-font uppercase">Freelance Hub</h3>
                         </div>
                     </div>
                 </div>
             </main>
         </div>
 
-        <!-- PÁGINA: DETALLE SHOWREEL (INFO PROFESIONAL RESTAURADA) -->
+        <!-- PÁGINA: DETALLE SHOWREEL (INFO VERÍDICA) -->
         <div id="page-project" class="page-section">
             <div class="fixed top-28 left-6 md:left-12 z-40">
-                <button onclick="switchPage('home')" class="flex items-center gap-3 text-xs font-bold tracking-[0.2em] uppercase text-gray-400 hover:text-[var(--accent)] transition group">
-                    <i class="fas fa-arrow-left transition-transform group-hover:-translate-x-1"></i> Volver
-                </button>
+                <button onclick="switchPage('home')" class="flex items-center gap-3 text-xs font-bold tracking-[0.2em] uppercase text-gray-400 hover:text-[var(--accent)] transition group"><i class="fas fa-arrow-left transition-transform group-hover:-translate-x-1"></i> Volver</button>
             </div>
             <article class="pt-40 pb-24 container mx-auto px-6 md:px-12 text-left">
                 <div class="w-full aspect-video bg-[#111] border border-gray-900 mb-12 overflow-hidden relative shadow-2xl">
-                    <iframe class="w-full h-full object-cover" src="https://www.youtube.com/embed/2ntPC4qcaR0?rel=0&modestbranding=1" title="Fabricio Atalaya Reel" frameborder="0" allowfullscreen></iframe>
+                    <iframe class="w-full h-full object-cover" src="https://www.youtube.com/embed/2ntPC4qcaR0" title="Fabricio Atalaya Reel" frameborder="0" allowfullscreen></iframe>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-24">
-                    <div class="md:col-span-4 text-left">
-                        <h1 class="text-4xl md:text-6xl font-bold text-white heading-font mb-6 leading-none uppercase">FABRIZIO <br> <span class="text-gray-700">ATALAYA</span></h1>
-                        <div class="space-y-4 text-xs font-mono border-t border-gray-800 pt-6 uppercase text-left">
-                            <div class="flex justify-between"><span class="text-gray-500 tracking-widest">Cargo</span><span class="text-white">Post-productor</span></div>
-                            <div class="flex justify-between"><span class="text-gray-500 tracking-widest">Especialidad</span><span class="text-white">Comunicación Visual</span></div>
-                            <div class="flex justify-between"><span class="text-gray-500 tracking-widest">Año</span><span class="text-white">2026</span></div>
+                    <div class="md:col-span-4">
+                        <h1 class="text-5xl md:text-7xl font-bold text-white heading-font mb-6 leading-none uppercase">FABRIZIO <br> <span class="text-gray-700">ATALAYA</span></h1>
+                        <div class="space-y-4 text-xs font-mono border-t border-gray-800 pt-6 uppercase">
+                            <div class="flex justify-between"><span class="text-gray-500">Cargo</span><span class="text-white">Post-productor</span></div>
+                            <div class="flex justify-between"><span class="text-gray-500">Especialidad</span><span class="text-white">Comunicación Visual</span></div>
+                            <div class="flex justify-between"><span class="text-gray-500">Año</span><span class="text-white">2026</span></div>
                         </div>
                     </div>
-                    <div class="md:col-span-8 text-left">
-                        <h3 class="text-xl font-bold text-[var(--accent)] mb-4 heading-font uppercase">Visión Estratégica</h3>
-                        <p class="text-gray-400 leading-relaxed mb-10 font-light text-lg">Profesionalizar la comunicación visual mediante la integración de técnica audiovisual avanzada y procesos optimizados con Inteligencia Artificial. Mi enfoque busca que cada pieza gráfica y de video no solo mantenga un estándar técnico de alta calidad, sino que esté estructurada estratégicamente para maximizar el impacto de marca en cualquier plataforma digital.</p>
-                        <h3 class="text-xl font-bold text-[var(--accent)] mb-4 heading-font uppercase">Propuesta de Valor</h3>
-                        <p class="text-gray-400 leading-relaxed font-light text-lg">Desarrollo y ejecuto proyectos audiovisuales y de diseño gráfico con un enfoque en resultados tangibles, desde el crecimiento de audiencias orgánicas hasta la reestructuración de identidades corporativas. Mi trabajo combina el dominio técnico con estrategias de contenido que incrementan la presencia digital y la autoridad de marca.</p>
+                    <div class="md:col-span-8">
+                        <h3 class="text-xl font-bold text-white mb-4 heading-font uppercase">Visión Estratégica</h3>
+                        <p class="text-gray-400 leading-relaxed mb-10 font-light text-lg">Profesionalizar la comunicación visual mediante la integración de técnica audiovisual avanzada y procesos optimizados con Inteligencia Artificial. Mi enfoque busca que cada pieza gráfica y de video no solo mantenga un estándar técnico de alta calidad, sino que esté estructurada estratégicamente para maximizar el alcance y la relevancia de la marca en cualquier plataforma digital.</p>
+                        <h3 class="text-xl font-bold text-white mb-4 heading-font uppercase">Propuesta de Valor</h3>
+                        <p class="text-gray-400 leading-relaxed font-light text-lg">Desarrollo y ejecuto proyectos audiovisuales y de diseño gráfico con un enfoque en resultados tangibles, desde el crecimiento de audiencias orgánicas hasta la reestructuración de identidades corporativas. Mi trabajo combina el dominio técnico de herramientas de edición con estrategias de contenido que incrementan la presencia digital y la autoridad de marca en diversos sectores.</p>
                     </div>
                 </div>
             </article>
         </div>
 
-        <!-- PÁGINA: DETALLE GRUPO CREDCO (INFO CV COMPLETA) -->
+        <!-- PÁGINA: DETALLE GRUPO CREDCO (INFO CV VERÍDICA) -->
         <div id="page-project-credco" class="page-section">
             <div class="fixed top-28 left-6 md:left-12 z-40">
                 <button onclick="switchPage('home')" class="flex items-center gap-3 text-xs font-bold tracking-[0.2em] uppercase text-gray-400 hover:text-[var(--accent)] transition"><i class="fas fa-arrow-left"></i> Volver</button>
             </div>
             <article class="pt-40 pb-24 container mx-auto px-6 md:px-12 text-left">
-                <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-20 border-b border-white/5 pb-20 text-left">
-                    <div class="md:col-span-4 text-left">
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-20 border-b border-white/5 pb-20">
+                    <div class="md:col-span-4">
                         <h1 class="text-5xl font-bold text-white heading-font leading-none uppercase">Grupo<br><span class="text-[var(--credco-blue)]">Credco</span></h1>
-                        <div class="info-grid uppercase text-left">
+                        <div class="info-grid uppercase">
                             <div class="info-item"><span class="info-label">Cargo</span><span class="info-value">Diseñador Gráfico & Especialista Audiovisual</span></div>
                             <div class="info-item"><span class="info-label">Modalidad</span><span class="info-value">In-House (2023 - 2025)</span></div>
                         </div>
                     </div>
-                    <div class="md:col-span-8 text-left">
-                        <h3 class="text-xl font-bold text-[var(--accent)] mb-6 heading-font uppercase">Aporte y Resultados Estratégicos</h3>
-                        <ul class="space-y-4 text-gray-400 font-light text-lg leading-relaxed list-disc list-outside ml-4 text-left">
-                            <li>**Reestructuración de Identidad:** Estandarización completa de la identidad visual corporativa y logotipos para procesos internos y externos.</li>
-                            <li>**Estrategia LinkedIn:** Liderazgo de contenidos logrando posicionar a la marca en el **Top 10 sectorial** mediante contenido de valor.</li>
-                            <li>**Producción Editorial:** Diseño de material institucional como libros, agendas y señalética técnica especializada.</li>
-                            <li>**Soporte de Ingeniería:** Creación de simulaciones visuales y piezas audiovisuales para licitaciones críticas de minería e industria.</li>
+                    <div class="md:col-span-8">
+                        <h3 class="text-xl font-bold text-[var(--accent)] mb-6 heading-font uppercase">Aporte y Resultados</h3>
+                        <ul class="space-y-4 text-gray-400 font-light text-lg leading-relaxed list-disc list-outside ml-4">
+                            <li>**Reestructuración de Identidad:** Estandarización completa de la identidad visual corporativa y logotipos.</li>
+                            <li>**Estrategia LinkedIn:** Liderazgo de contenidos logrando posicionar a la marca en el **Top 10 sectorial**.</li>
+                            <li>**Producción Editorial:** Diseño de libros, agendas y señalética técnica institucional.</li>
+                            <li>**Soporte de Ingeniería:** Creación de simulaciones visuales para licitaciones críticas.</li>
                         </ul>
                     </div>
                 </div>
-                <div class="space-y-24 text-left">
-                    <div><div class="section-tag uppercase text-left">LinkedIn & Reels (Vertical Content)</div>
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-left">
-                            <div class="asset-frame aspect-[9/16]"><i class="fas fa-mobile-alt asset-icon"></i><span class="asset-label">REEL ESTRATÉGICO</span></div>
-                            <div class="asset-frame aspect-[9/16]"><i class="fas fa-mobile-alt asset-icon"></i><span class="asset-label">REEL ESTRATÉGICO</span></div>
-                            <div class="asset-frame aspect-[9/16]"><i class="fas fa-mobile-alt asset-icon"></i><span class="asset-label">REEL ESTRATÉGICO</span></div>
-                            <div class="asset-frame aspect-[9/16]"><i class="fas fa-mobile-alt asset-icon"></i><span class="asset-label">REEL ESTRATÉGICO</span></div>
-                        </div>
-                    </div>
-                    <div><div class="section-tag uppercase uppercase">Technical Video & Simulations (Horizontal)</div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
-                            <div class="asset-frame aspect-video text-left"><i class="fas fa-cogs asset-icon"></i><span class="asset-label">SIMULACIÓN INGENIERÍA</span></div>
-                            <div class="asset-frame aspect-video text-left"><i class="fas fa-film asset-icon"></i><span class="asset-label">VIDEO CORPORATIVO</span></div>
-                        </div>
-                    </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="asset-frame aspect-video"><i class="fas fa-cogs asset-icon"></i><span class="asset-label uppercase">Simulación Ingeniería</span></div>
+                    <div class="asset-frame aspect-video"><i class="fas fa-book asset-icon"></i><span class="asset-label uppercase">Editorial Asset</span></div>
                 </div>
             </article>
         </div>
 
-        <!-- PÁGINA: DETALLE REDSATEL (INFO CV COMPLETA) -->
+        <!-- PÁGINA: REDSATEL PERÚ (INFO VERÍDICA) -->
         <div id="page-project-redsatel" class="page-section">
             <div class="fixed top-28 left-6 md:left-12 z-40">
                 <button onclick="switchPage('home')" class="flex items-center gap-3 text-xs font-bold tracking-[0.2em] uppercase text-gray-400 hover:text-[var(--accent)] transition"><i class="fas fa-arrow-left"></i> Volver</button>
             </div>
             <article class="pt-40 pb-24 container mx-auto px-6 md:px-12 text-left">
-                <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-20 border-b border-white/5 pb-20 text-left">
-                    <div class="md:col-span-4 text-left">
-                        <h1 class="text-5xl font-bold text-white heading-font leading-none uppercase text-left">RedSatel<br><span class="text-[var(--redsatel-blue)]">Perú</span></h1>
-                        <div class="info-grid uppercase text-left">
-                            <div class="info-item text-left"><span class="info-label">Cargo</span><span class="info-value">Editor Audiovisual & Animador 2D</span></div>
-                            <div class="info-item text-left"><span class="info-label">Logro</span><span class="info-value">+10k TikTok (2 Semanas)</span></div>
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-20 border-b border-white/5 pb-20">
+                    <div class="md:col-span-4">
+                        <h1 class="text-5xl font-bold text-white heading-font leading-none uppercase">RedSatel<br><span class="text-[var(--redsatel-blue)]">Perú</span></h1>
+                        <div class="info-grid uppercase">
+                            <div class="info-item"><span class="info-label">Cargo</span><span class="info-value">Editor Audiovisual & Animador 2D</span></div>
+                            <div class="info-item"><span class="info-label">Logro</span><span class="info-value">+10k TikTok (2 Semanas)</span></div>
                         </div>
                     </div>
-                    <div class="md:col-span-8 text-left">
-                        <h3 class="text-xl font-bold text-[var(--accent)] mb-6 heading-font uppercase text-left">Estrategia de Crecimiento Viral</h3>
-                        <p class="text-gray-400 font-light text-lg leading-relaxed text-left">Diseñé y ejecuté la estrategia de **TikTok**, logrando un crecimiento orgánico de **0 a +10k seguidores en solo 2 semanas**. Produje spots televisivos integrando animación 2D y storytelling comercial de alto impacto.</p>
+                    <div class="md:col-span-8">
+                        <h3 class="text-xl font-bold text-[var(--accent)] mb-6 heading-font uppercase">Estrategia Viral</h3>
+                        <p class="text-gray-400 font-light text-lg leading-relaxed">Diseñé y ejecuté la estrategia de **TikTok**, logrando un crecimiento orgánico explosivo de **0 a +10k seguidores en solo 2 semanas**. Produje spots integrando animación 2D y storytelling comercial.</p>
                     </div>
                 </div>
-                <div class="space-y-24 text-left">
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-left">
-                        <div class="asset-frame aspect-[9/16]"><i class="fab fa-tiktok asset-icon"></i><span class="asset-label">REEL VIRAL</span></div>
-                        <div class="asset-frame aspect-[9/16]"><i class="fab fa-tiktok asset-icon"></i><span class="asset-label">REEL VIRAL</span></div>
-                        <div class="asset-frame aspect-[9/16]"><i class="fab fa-tiktok asset-icon"></i><span class="asset-label">REEL VIRAL</span></div>
-                        <div class="asset-frame aspect-[9/16]"><i class="fab fa-tiktok asset-icon"></i><span class="asset-label">REEL VIRAL</span></div>
-                    </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div class="asset-frame aspect-[9/16]"><i class="fab fa-tiktok asset-icon"></i><span class="asset-label uppercase">Viral Reel 01</span></div>
+                    <div class="asset-frame aspect-[9/16]"><i class="fab fa-tiktok asset-icon"></i><span class="asset-label uppercase">Viral Reel 02</span></div>
+                    <div class="asset-frame aspect-[9/16]"><i class="fab fa-tiktok asset-icon"></i><span class="asset-label uppercase">Viral Reel 03</span></div>
+                    <div class="asset-frame aspect-[9/16]"><i class="fab fa-tiktok asset-icon"></i><span class="asset-label uppercase">Viral Reel 04</span></div>
                 </div>
             </article>
         </div>
 
-        <!-- PÁGINA: DETALLE SPEEDY GROUP (INFO CV COMPLETA) -->
+        <!-- PÁGINA: SPEEDY GROUP (INFO VERÍDICA) -->
         <div id="page-project-speedy" class="page-section">
             <div class="fixed top-28 left-6 md:left-12 z-40">
                 <button onclick="switchPage('home')" class="flex items-center gap-3 text-xs font-bold tracking-[0.2em] uppercase text-gray-400 hover:text-[var(--accent)] transition"><i class="fas fa-arrow-left"></i> Volver</button>
             </div>
             <article class="pt-40 pb-24 container mx-auto px-6 md:px-12 text-left">
-                <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-20 border-b border-white/5 pb-20 text-left">
-                    <div class="md:col-span-4 text-left">
-                        <h1 class="text-5xl font-bold text-white heading-font leading-none uppercase text-left">Speedy<br><span class="text-[var(--speedy-blue)]">Group</span></h1>
-                        <div class="info-grid uppercase text-left">
-                            <div class="info-item text-left"><span class="info-label">Cargo</span><span class="info-value">Editor Audiovisual & Subtitulador</span></div>
-                            <div class="info-item text-left"><span class="info-label">Foco</span><span class="info-value">TV Perú (Aprendo en Casa)</span></div>
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-20 border-b border-white/5 pb-20">
+                    <div class="md:col-span-4">
+                        <h1 class="text-5xl font-bold text-white heading-font leading-none uppercase">Speedy<br><span class="text-[var(--speedy-blue)]">Group</span></h1>
+                        <div class="info-grid uppercase">
+                            <div class="info-item"><span class="info-label">Foco</span><span class="info-value">TV Perú (Aprendo en Casa)</span></div>
+                            <div class="info-item"><span class="info-label">Rol</span><span class="info-value">Editor Audiovisual & Subtitulador</span></div>
                         </div>
                     </div>
-                    <div class="md:col-span-8 text-left">
-                        <h3 class="text-xl font-bold text-[var(--accent)] mb-6 heading-font uppercase text-left">Excelencia en Televisión Nacional</h3>
-                        <p class="text-gray-400 font-light text-lg leading-relaxed text-left">Editor del programa educativo nacional "Aprendo en Casa", asegurando estándares de calidad para TV Perú. Gestioné la postproducción de segmentos pedagógicos y animación 2D infantil.</p>
+                    <div class="md:col-span-8">
+                        <h3 class="text-xl font-bold text-[var(--accent)] mb-6 heading-font uppercase">Excelencia en TV Nacional</h3>
+                        <p class="text-gray-400 font-light text-lg leading-relaxed">Editor del programa educativo nacional "Aprendo en Casa", asegurando estándares de alta calidad para TV Perú. Gestión de postproducción para piezas pedagógicas y animación 2D infantil.</p>
                     </div>
                 </div>
-                <div class="asset-frame aspect-video w-full text-left"><i class="fas fa-tv asset-icon"></i><span class="asset-label">CLIP PROGRAMA TV PERÚ</span></div>
+                <div class="asset-frame aspect-video w-full"><i class="fas fa-tv asset-icon"></i><span class="asset-label uppercase">Aprendo en Casa Clip</span></div>
             </article>
         </div>
 
-        <!-- PÁGINA: DETALLE GEOSATELITAL (INFO CV COMPLETA) -->
-        <div id="page-project-geosatelital" class="page-section text-left">
+        <!-- PÁGINA: GEOSATELITAL (INFO VERÍDICA) -->
+        <div id="page-project-geosatelital" class="page-section">
             <div class="fixed top-28 left-6 md:left-12 z-40">
                 <button onclick="switchPage('home')" class="flex items-center gap-3 text-xs font-bold tracking-[0.2em] uppercase text-gray-400 hover:text-[var(--accent)] transition"><i class="fas fa-arrow-left"></i> Volver</button>
             </div>
             <article class="pt-40 pb-24 container mx-auto px-6 md:px-12 text-left">
                 <h1 class="text-5xl font-bold text-white heading-font mb-12 uppercase text-left">Geo<span class="text-[var(--geosatelital-blue)]">Satelital</span></h1>
-                <p class="text-gray-400 text-lg mb-12 max-w-3xl leading-relaxed text-left">Aliado estratégico externo para soporte visual continuo en campañas digitales y redes sociales enfocado en tecnología vehicular y datos satelitales.</p>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
-                    <div class="asset-frame aspect-[3/4] text-left"><i class="fas fa-palette asset-icon"></i><span class="asset-label">FLYER DISEÑO</span></div>
-                    <div class="asset-frame aspect-[3/4] text-left"><i class="fas fa-palette asset-icon"></i><span class="asset-label">AD CONTENT</span></div>
-                    <div class="asset-frame aspect-[3/4] text-left"><i class="fas fa-palette asset-icon"></i><span class="asset-label">BANNER WEB</span></div>
+                <p class="text-gray-400 text-lg mb-12 max-w-3xl leading-relaxed">Aliado estratégico externo para soporte visual continuo en campañas digitales y redes sociales enfocado en tecnología vehicular y datos satelitales.</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="asset-frame aspect-[3/4]"><i class="fas fa-palette asset-icon"></i><span class="asset-label uppercase">Ad Content 01</span></div>
+                    <div class="asset-frame aspect-[3/4]"><i class="fas fa-palette asset-icon"></i><span class="asset-label uppercase">Ad Content 02</span></div>
+                    <div class="asset-frame aspect-[3/4]"><i class="fas fa-palette asset-icon"></i><span class="asset-label uppercase">Ad Content 03</span></div>
                 </div>
             </article>
         </div>
 
-        <!-- OTRAS PÁGINAS -->
-        <div id="page-about" class="page-section">
+        <!-- PÁGINA: FREELANCE HUB (LISTA COMPLETA DE 16 PROYECTOS) -->
+        <div id="page-project-freelance" class="page-section">
             <div class="fixed top-28 left-6 md:left-12 z-40">
-                <button onclick="switchPage('home')" class="flex items-center gap-3 text-xs font-bold tracking-[0.2em] uppercase text-gray-400 hover:text-[var(--accent)] transition"><i class="fas fa-arrow-left"></i> Volver</button>
+                <button onclick="switchPage('home')" class="flex items-center gap-3 text-xs font-bold tracking-[0.2em] uppercase text-gray-400 hover:text-[var(--accent)] transition group"><i class="fas fa-arrow-left"></i> Volver al Inicio</button>
             </div>
+            <article class="pt-40 pb-24 container mx-auto px-6 md:px-12 text-left">
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-20 border-b border-white/5 pb-20">
+                    <div class="md:col-span-5">
+                        <h1 class="text-5xl md:text-8xl font-bold text-white heading-font leading-none uppercase">Freelance<br><span class="text-gray-800">Hub</span></h1>
+                        <p class="mt-8 text-[10px] text-[var(--accent)] font-bold tracking-[0.3em] uppercase">Sectores: Retail, Social, Legal & Wellness</p>
+                    </div>
+                    <div class="md:col-span-7">
+                        <h3 class="text-xl font-bold text-[var(--accent)] mb-6 heading-font uppercase">Soluciones Independientes</h3>
+                        <p class="text-gray-400 text-lg leading-relaxed font-light">Compilación de proyectos independientes realizados para diversos sectores. Cada cuadro representa un caso de éxito visual adaptado a necesidades específicas.</p>
+                    </div>
+                </div>
+
+                <!-- GRID DE 16 TRABAJOS (INFORMACIÓN VERÍDICA) -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="portfolio-item group aspect-video reveal"><img src="https://images.unsplash.com/photo-1513104890138-7c749659a591" class="w-full h-full object-cover"><div class="project-overlay"><span class="text-[var(--accent)] text-[9px] font-bold uppercase mb-1">Retail</span><h3 class="text-xl font-bold text-white heading-font">Papa John's</h3></div></div>
+                    <div class="portfolio-item group md:row-span-2 block relative overflow-hidden aspect-[4/5] reveal"><img src="https://images.unsplash.com/photo-1544161515-4af6b1d4640b" class="w-full h-full object-cover"><div class="project-overlay"><span class="text-[var(--accent)] text-[9px] font-bold uppercase mb-1">Wellness</span><h3 class="text-xl font-bold text-white heading-font">Spa & Wellness</h3></div></div>
+                    <div class="portfolio-item group aspect-video reveal"><img src="https://images.unsplash.com/photo-1590947132387-155cc02f3212" class="w-full h-full object-cover"><div class="project-overlay"><span class="text-[var(--accent)] text-[9px] font-bold uppercase mb-1">Food Retail</span><h3 class="text-xl font-bold text-white heading-font">Atalaya Pizzas y cono</h3></div></div>
+                    <div class="portfolio-item group aspect-video reveal"><img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622" class="w-full h-full object-cover"><div class="project-overlay"><span class="text-[var(--accent)] text-[9px] font-bold uppercase mb-1">Social Events</span><h3 class="text-xl font-bold text-white heading-font">Bodas & Eventos</h3></div></div>
+                    <div class="portfolio-item group aspect-video reveal"><img src="https://images.unsplash.com/photo-1574129624535-649069d2753a" class="w-full h-full object-cover"><div class="project-overlay"><span class="text-[var(--accent)] text-[9px] font-bold uppercase mb-1">Food Retail</span><h3 class="text-xl font-bold text-white heading-font">Pizzas Di Karla</h3></div></div>
+                    <div class="portfolio-item group md:col-span-2 block relative overflow-hidden aspect-video reveal"><img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff" class="w-full h-full object-cover"><div class="project-overlay"><span class="text-[var(--accent)] text-[9px] font-bold uppercase mb-1">Calzado / Moda</span><h3 class="text-2xl font-bold text-white heading-font">Azaleia Perú</h3></div></div>
+                    <div class="portfolio-item group aspect-video reveal"><img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae" class="w-full h-full object-cover"><div class="project-overlay"><span class="text-[var(--accent)] text-[9px] font-bold uppercase mb-1">Suplementos</span><h3 class="text-xl font-bold text-white heading-font">Bioshorp</h3></div></div>
+                    <div class="portfolio-item group aspect-video reveal"><img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3" class="w-full h-full object-cover"><div class="project-overlay"><span class="text-[var(--accent)] text-[9px] font-bold uppercase mb-1">Automotriz</span><h3 class="text-xl font-bold text-white heading-font">Clínica Automotriz</h3></div></div>
+                    <div class="portfolio-item group aspect-video reveal"><img src="https://images.unsplash.com/photo-1558981403-c5f91cbba527" class="w-full h-full object-cover"><div class="project-overlay"><span class="text-[var(--accent)] text-[9px] font-bold uppercase mb-1">Motos</span><h3 class="text-xl font-bold text-white heading-font">eBaker</h3></div></div>
+                    <div class="portfolio-item group aspect-video reveal"><img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3" class="w-full h-full object-cover"><div class="project-overlay"><span class="text-[var(--accent)] text-[9px] font-bold uppercase mb-1">Malls / Retail</span><h3 class="text-xl font-bold text-white heading-font">Open Plaza</h3></div></div>
+                    <div class="portfolio-item group aspect-video reveal"><img src="https://images.unsplash.com/photo-1495020689067-958852a7765e" class="w-full h-full object-cover"><div class="project-overlay"><span class="text-[var(--accent)] text-[9px] font-bold uppercase mb-1">Digital TV</span><h3 class="text-xl font-bold text-white heading-font">RSC TV Online</h3></div></div>
+                    <div class="portfolio-item group aspect-video reveal"><img src="https://images.unsplash.com/photo-1544025162-d76694265947" class="w-full h-full object-cover"><div class="project-overlay"><span class="text-[var(--accent)] text-[9px] font-bold uppercase mb-1">Gastronomía</span><h3 class="text-xl font-bold text-white heading-font">La Reina</h3></div></div>
+                    <div class="portfolio-item group md:col-span-2 block relative overflow-hidden aspect-video reveal"><img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa" class="w-full h-full object-cover"><div class="project-overlay"><span class="text-[var(--accent)] text-[9px] font-bold uppercase mb-1">Bienes Raíces</span><h3 class="text-2xl font-bold text-white heading-font">Proyecto Inmobiliario</h3></div></div>
+                    <div class="portfolio-item group aspect-video reveal"><img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8" class="w-full h-full object-cover"><div class="project-overlay"><span class="text-[var(--accent)] text-[9px] font-bold uppercase mb-1">Moda</span><h3 class="text-xl font-bold text-white heading-font">Miluska Boutique</h3></div></div>
+                    <div class="portfolio-item group aspect-video reveal"><img src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7" class="w-full h-full object-cover"><div class="project-overlay"><span class="text-[var(--accent)] text-[9px] font-bold uppercase mb-1">Veterinaria</span><h3 class="text-xl font-bold text-white heading-font">Proyecto Veterinario</h3></div></div>
+                    <div class="portfolio-item group aspect-video reveal"><img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f" class="w-full h-full object-cover"><div class="project-overlay"><span class="text-[var(--accent)] text-[9px] font-bold uppercase mb-1">Legal</span><h3 class="text-xl font-bold text-white heading-font">Estudio Jurídico</h3></div></div>
+                </div>
+            </article>
+        </div>
+
+        <!-- PÁGINA: SOBRE MÍ -->
+        <div id="page-about" class="page-section">
             <div class="min-h-screen flex flex-col justify-center pt-32 pb-24 container mx-auto px-6 md:px-12 text-left">
-                <div class="flex flex-col md:flex-row items-center gap-16 text-left">
-                    <div class="w-full md:w-1/2 reveal-on-scroll text-left">
-                        <div class="relative aspect-[3/4] overflow-hidden border border-gray-800 text-left">
-                            <img src="foto-perfil.jpg.jpeg" alt="Fabrizio Atalaya" class="w-full h-full object-cover grayscale transition duration-700 hover:grayscale-0">
+                <div class="flex flex-col md:flex-row items-center gap-16">
+                    <div class="w-full md:w-1/2 reveal">
+                        <div class="relative aspect-[3/4] overflow-hidden border border-gray-800">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800" alt="Fabrizio Atalaya" class="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-700">
                         </div>
                     </div>
                     <div class="w-full md:w-1/2 text-left">
-                        <p class="text-[var(--accent)] text-xs font-bold tracking-[0.4em] uppercase mb-6 uppercase text-left">Director Creativo</p>
-                        <h1 class="text-5xl md:text-8xl font-bold text-white heading-font mb-8 uppercase leading-none text-left">Más que<br><span class="text-gray-700">Diseño.</span></h1>
-                        <p class="text-gray-400 text-lg font-light leading-relaxed text-left">Creativo multidisciplinario con más de 4 años de trayectoria profesional liderando identidad visual en entornos industriales.</p>
+                        <p class="text-[var(--accent)] text-xs font-bold tracking-[0.4em] uppercase mb-6 uppercase">Director Creativo</p>
+                        <h1 class="text-5xl md:text-8xl font-bold text-white heading-font mb-8 uppercase leading-none">Más que<br><span class="text-gray-700">Diseño.</span></h1>
+                        <p class="text-gray-400 text-lg font-light leading-relaxed">Creativo multidisciplinario con más de 4 años de trayectoria profesional liderando identidad visual en entornos industriales.</p>
                         <div class="flex gap-12 border-t border-white/5 pt-10 mt-10">
-                            <div><span class="block text-3xl font-bold text-white uppercase uppercase">4+</span><span class="text-[10px] text-gray-500 uppercase tracking-widest uppercase">Años Exp.</span></div>
-                            <div><span class="block text-3xl font-bold text-white uppercase uppercase uppercase">Google</span><span class="text-[10px] text-gray-500 uppercase tracking-widest uppercase">Certified</span></div>
+                            <div><span class="block text-3xl font-bold text-white">4+</span><span class="text-[10px] text-gray-500 uppercase tracking-widest">Años Exp.</span></div>
+                            <div><span class="block text-3xl font-bold text-white">Google</span><span class="text-[10px] text-gray-500 uppercase tracking-widest">Certified</span></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
+        <!-- PÁGINA: SERVICIOS -->
         <div id="page-services" class="page-section">
             <header class="pt-48 pb-32 container mx-auto px-6 md:px-12 text-center uppercase">
-                <h1 class="text-5xl md:text-8xl font-bold text-white heading-font uppercase mb-12 leading-none uppercase">Servicios<br><span class="text-gray-600">Especializados</span></h1>
+                <h1 class="text-5xl md:text-8xl font-bold text-white heading-font mb-12 uppercase leading-none">Servicios<br><span class="text-gray-600">Especializados</span></h1>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-24 text-left">
-                    <div class="p-10 border border-white/5 hover:border-[var(--accent)] transition-all bg-[#0a0a0a] uppercase uppercase"><i class="fas fa-film text-2xl text-[var(--accent)] mb-6"></i><h3 class="text-xl font-bold text-white heading-font">Motion Design</h3></div>
-                    <div class="p-10 border border-white/5 hover:border-[var(--accent)] transition-all bg-[#0a0a0a] uppercase uppercase"><i class="fas fa-pencil-ruler text-2xl text-[var(--accent)] mb-6"></i><h3 class="text-xl font-bold text-white heading-font">Branding B2B</h3></div>
-                    <div class="p-10 border border-white/5 hover:border-[var(--accent)] transition-all bg-[#0a0a0a] uppercase uppercase"><i class="fas fa-robot text-2xl text-[var(--accent)] mb-6"></i><h3 class="text-xl font-bold text-white heading-font">IA Content</h3></div>
+                    <div class="p-10 border border-white/5 hover:border-[var(--accent)] transition-all bg-[#0a0a0a]"><i class="fas fa-film text-2xl text-[var(--accent)] mb-6"></i><h3 class="text-xl font-bold text-white heading-font">Motion Design</h3></div>
+                    <div class="p-10 border border-white/5 hover:border-[var(--accent)] transition-all bg-[#0a0a0a]"><i class="fas fa-pencil-ruler text-2xl text-[var(--accent)] mb-6"></i><h3 class="text-xl font-bold text-white heading-font">Branding B2B</h3></div>
+                    <div class="p-10 border border-white/5 hover:border-[var(--accent)] transition-all bg-[#0a0a0a]"><i class="fas fa-robot text-2xl text-[var(--accent)] mb-6"></i><h3 class="text-xl font-bold text-white heading-font">IA Content</h3></div>
                 </div>
-                <button onclick="openModal()" class="mt-20 bg-[var(--accent)] text-black px-12 py-5 font-bold uppercase tracking-widest hover:bg-white transition-colors duration-300 uppercase">Solicitar Cotización</button>
+                <button onclick="openModal()" class="mt-20 bg-[var(--accent)] text-black px-12 py-5 font-bold uppercase tracking-widest hover:bg-white transition-colors duration-300">Solicitar Cotización</button>
             </header>
         </div>
 
     </div>
 
     <!-- FOOTER -->
-    <footer class="bg-[#080808] border-t border-gray-900 py-24 text-left uppercase text-left">
-        <div class="container mx-auto px-6 md:px-12 uppercase text-left">
-            <div class="flex flex-col md:flex-row justify-between items-start gap-16 mb-24 text-left uppercase">
-                <div class="md:w-1/2 text-left">
-                    <p class="text-[var(--accent)] text-xs font-bold uppercase mb-8 tracking-widest uppercase text-left text-left">Hablemos ahora</p>
-                    <a href="mailto:atalayatanantafabrizio@gmail.com" class="text-3xl md:text-5xl font-bold heading-font text-white hover:text-gray-400 transition leading-none uppercase text-left">atalayatanantafabrizio<br>@gmail.com</a>
+    <footer class="bg-[#080808] border-t border-gray-900 py-24 text-left uppercase">
+        <div class="container mx-auto px-6 md:px-12 uppercase">
+            <div class="flex flex-col md:flex-row justify-between items-start gap-16 mb-24">
+                <div class="md:w-1/2">
+                    <p class="text-[var(--accent)] text-xs font-bold uppercase mb-8 tracking-widest">Hablemos ahora</p>
+                    <a href="mailto:atalayatanantafabrizio@gmail.com" class="text-3xl md:text-5xl font-bold heading-font text-white hover:text-gray-400 transition leading-none">atalayatanantafabrizio<br>@gmail.com</a>
                 </div>
-                <div class="md:w-1/4 flex flex-col gap-6 text-xs text-gray-500 uppercase tracking-widest font-bold uppercase">
+                <div class="md:w-1/4 flex flex-col gap-6 text-xs text-gray-500 uppercase tracking-widest font-bold">
                     <button onclick="switchPage('home')" class="text-left hover:text-white uppercase">Inicio</button>
                     <button onclick="navigateToWork()" class="text-left hover:text-white uppercase">Portafolio</button>
                 </div>
             </div>
-            <div class="mt-24 pt-8 border-t border-white/5 flex justify-between items-center text-[10px] text-gray-700 uppercase tracking-widest text-left">
+            <div class="mt-24 pt-8 border-t border-white/5 flex justify-between items-center text-[10px] text-gray-700 uppercase tracking-widest">
                 <span>© 2025 Fabrizio Atalaya</span>
                 <span>Lima, Perú</span>
             </div>
@@ -475,17 +474,18 @@
 
         function switchPage(pageId, targetId = null) {
             const overlay = document.getElementById('transition-overlay');
-            const sections = ['page-home', 'page-services', 'page-project', 'page-about', 'page-project-redsatel', 'page-project-geosatelital', 'page-project-speedy', 'page-project-credco'];
-            overlay.classList.remove('no-transition', 'exit');
+            const sections = ['page-home', 'page-services', 'page-project', 'page-about', 'page-project-redsatel', 'page-project-geosatelital', 'page-project-speedy', 'page-project-credco', 'page-project-freelance'];
             overlay.classList.add('active');
             setTimeout(() => {
                 sections.forEach(id => { const el = document.getElementById(id); if (el) el.classList.remove('active-page'); });
                 const targetPage = document.getElementById('page-' + pageId);
                 if (targetPage) targetPage.classList.add('active-page');
+                
                 if (targetId) { 
                     const targetElement = document.getElementById(targetId); 
                     if(targetElement) targetElement.scrollIntoView(); 
                 } else { window.scrollTo(0,0); }
+                
                 setTimeout(() => { overlay.classList.add('exit'); setTimeout(() => { overlay.classList.remove('active', 'exit'); }, 800); }, 200);
             }, 800); 
         }
@@ -501,30 +501,16 @@
             closeModal();
         }
 
-        function filterSelection(c, btn) {
-            var x = document.getElementsByClassName("portfolio-item");
-            var btns = document.getElementsByClassName("filter-btn");
-            if(btn) { for (var j = 0; j < btns.length; j++) btns[j].classList.remove("active"); btn.classList.add("active"); }
-            if (c == "all") c = "";
-            for (var i = 0; i < x.length; i++) {
-                if (x[i].className.indexOf(c) > -1) x[i].classList.add("show");
-                else x[i].classList.remove("show");
-            }
-        }
-        
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) { entry.target.classList.add('active'); }
-            });
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
         }, { threshold: 0.1 });
 
         document.addEventListener('DOMContentLoaded', () => { 
-            filterSelection('all', document.querySelector('.filter-btn.active')); 
             document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
         });
 
-        const nav = document.querySelector('nav');
         window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
             if (window.scrollY > 50) nav.classList.add('scrolled');
             else nav.classList.remove('scrolled');
         });
