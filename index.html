@@ -339,14 +339,13 @@
             </article>
         </div>
 
-        <!-- PÁGINA: APRENDO EN CASA (INTEGRACIÓN COMPLETA DE ASSETS) -->
+        <!-- PÁGINA: APRENDO EN CASA (INTEGRACIÓN COMPLETA DE ASSETS Y FIX DE TILDES) -->
         <div id="page-aprendo" class="page-section">
             <div class="fixed top-28 left-6 md:left-12 z-40">
                 <button onclick="switchPage('home')" class="flex items-center gap-3 text-xs font-bold tracking-[0.2em] uppercase text-gray-400 hover:text-[var(--aprendo-orange)] transition"><i class="fas fa-arrow-left"></i> Inicio</button>
             </div>
             
             <article class="pt-40 pb-24 container mx-auto px-6 md:px-12">
-                <!-- VISTA PRINCIPAL -->
                 <div id="aprendo-main-view">
                     <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-20 border-b border-white/5 pb-20">
                         <div class="md:col-span-4">
@@ -370,7 +369,7 @@
 
                     <h3 class="text-[10px] font-bold text-gray-500 uppercase tracking-[0.4em] mb-10 text-center">Casos de Estudio</h3>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <!-- FIX: MINIATURAS DE YOUTUBE RESTAURADAS -->
+                        <!-- MINIATURAS DE YOUTUBE -->
                         <div onclick="showAprendoProject('hugo')" class="portfolio-item group aspect-video border border-white/5">
                             <img src="https://img.youtube.com/vi/KRsg4Xum2mc/hqdefault.jpg" class="w-full h-full object-cover">
                             <div class="project-overlay"><span class="text-[var(--aprendo-orange)] text-[9px] font-bold uppercase mb-1">Cuento Animado</span><h3 class="text-xl font-bold text-white heading-font">Hugo y las Medias</h3></div>
@@ -386,7 +385,7 @@
                     </div>
                 </div>
 
-                <!-- SUB-SECCIONES: HUGO (RESTAURADO CON CODIFICACIÓN) -->
+                <!-- SUB-SECCIONES: HUGO (ASSETS CON RUTA CODIFICADA PARA GitHub) -->
                 <div id="sub-hugo" class="sub-project-content space-y-16">
                     <button onclick="hideAprendoProject()" class="text-xs font-bold text-gray-500 hover:text-[var(--aprendo-orange)] uppercase tracking-widest flex items-center gap-2 mb-10 transition"><i class="fas fa-arrow-left text-[10px]"></i> Volver</button>
                     <div class="w-full aspect-video bg-[#0a0a0a] border border-gray-900 shadow-2xl overflow-hidden">
@@ -404,7 +403,8 @@
                     </div>
                     <div class="pt-10 border-t border-white/5">
                         <h4 class="text-[10px] font-bold text-gray-500 uppercase tracking-[0.3em] mb-8 text-center">Character Design (Assets GitHub)</h4>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                            <!-- Nota técnica: %20 = espacio, %C3%B3 = ó -->
                             <div class="asset-frame aspect-square border-white/5"><img src="https://raw.githubusercontent.com/FabrizioAtalaya/Portfolio/main/Hugo%20y%20las%20medias/Assets/Assets%20Hugo.jpg" class="w-full h-full object-contain"><span class="asset-label">Hugo</span></div>
                             <div class="asset-frame aspect-square border-white/5"><img src="https://raw.githubusercontent.com/FabrizioAtalaya/Portfolio/main/Hugo%20y%20las%20medias/Assets/Assets%20Ladr%C3%B3n.jpg" class="w-full h-full object-contain"><span class="asset-label">Ladrón</span></div>
                             <div class="asset-frame aspect-square border-white/5"><img src="https://raw.githubusercontent.com/FabrizioAtalaya/Portfolio/main/Hugo%20y%20las%20medias/Assets/Assets%20Mam%C3%A1.jpg" class="w-full h-full object-contain"><span class="asset-label">Mamá</span></div>
@@ -430,25 +430,22 @@
                     </div>
                     <div class="pt-10 border-t border-white/5">
                         <h4 class="text-[10px] font-bold text-gray-500 uppercase tracking-[0.3em] mb-8 text-center">Visual Highlight</h4>
+                        <!-- Nota técnica: %C3%B3 = ó, %C3%B1 = ñ -->
                         <div class="asset-frame aspect-video max-w-2xl mx-auto border-white/5"><img src="https://raw.githubusercontent.com/FabrizioAtalaya/Portfolio/main/canci%C3%B3n%20Mi%20globo/Assets/personajes/Assets%20la%20ni%C3%B1a%20y%20el%20globo.jpg" class="w-full h-full object-contain"><span class="asset-label">La Niña y el Globo</span></div>
                     </div>
                 </div>
 
-                <!-- DETALLE: TÚNEL (RESTAURADO CON CODIFICACIÓN DE RUTAS) -->
+                <!-- DETALLE: TÚNEL -->
                 <div id="sub-tunel" class="sub-project-content space-y-16">
                     <button onclick="hideAprendoProject()" class="text-xs font-bold text-gray-500 hover:text-[var(--aprendo-orange)] uppercase tracking-widest flex items-center gap-2 mb-10 transition"><i class="fas fa-arrow-left text-[10px]"></i> Volver</button>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="aspect-video bg-[#0a0a0a] border border-gray-900 shadow-xl overflow-hidden relative">
-                            <iframe class="w-full h-full" src="https://www.youtube.com/embed/Ym_8KLRZN90" title="Cuento Cruzando el Túnel" frameborder="0" allowfullscreen></iframe>
-                        </div>
-                        <div class="aspect-video bg-[#0a0a0a] border border-gray-900 shadow-xl overflow-hidden relative">
-                            <iframe class="w-full h-full" src="https://www.youtube.com/embed/WtXUR6YOQzk" title="Canción Cruzando el Túnel" frameborder="0" allowfullscreen></iframe>
-                        </div>
+                        <div class="aspect-video bg-[#0a0a0a] border border-gray-900 shadow-xl overflow-hidden relative"><iframe class="w-full h-full" src="https://www.youtube.com/embed/Ym_8KLRZN90" title="Cuento Túnel" frameborder="0" allowfullscreen></iframe></div>
+                        <div class="aspect-video bg-[#0a0a0a] border border-gray-900 shadow-xl overflow-hidden relative"><iframe class="w-full h-full" src="https://www.youtube.com/embed/WtXUR6YOQzk" title="Canción Túnel" frameborder="0" allowfullscreen></iframe></div>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
                         <div>
                             <h3 class="text-xl font-bold text-[var(--aprendo-orange)] heading-font mb-4 uppercase">Integral: "Gateando por un túnel, alcanzo lo que quiero"</h3>
-                            <p class="text-gray-400 text-lg font-light leading-relaxed">Proyecto multiplataforma de estimulación temprana que combina narrativa visual y música dinámica.</p>
+                            <p class="text-gray-400 text-lg font-light leading-relaxed">Proyecto multiplataforma que combina narrativa visual y música dinámica.</p>
                         </div>
                         <div class="space-y-6">
                             <h4 class="text-xs font-bold tracking-widest text-white uppercase border-b border-[var(--aprendo-orange)] w-fit pb-1">Reto Técnico</h4>
@@ -459,12 +456,13 @@
                         <div>
                             <h4 class="text-[10px] font-bold text-gray-500 uppercase tracking-[0.3em] mb-6">Personajes</h4>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <!-- Nota técnica: %C3%BAnel = únel, %C3%B1a = ña, %C3%B1o = ño -->
                                 <div class="asset-frame aspect-video border-white/5"><img src="https://raw.githubusercontent.com/FabrizioAtalaya/Portfolio/main/gateando%20por%20un%20t%C3%BAnel%20alcanzo%20lo%20que%20quiero/assets%20personajes/ni%C3%B1a.jpg" class="w-full h-full object-contain"><span class="asset-label">Niña</span></div>
                                 <div class="asset-frame aspect-video border-white/5"><img src="https://raw.githubusercontent.com/FabrizioAtalaya/Portfolio/main/gateando%20por%20un%20t%C3%BAnel%20alcanzo%20lo%20que%20quiero/assets%20personajes/ni%C3%B1o.jpg" class="w-full h-full object-contain"><span class="asset-label">Niño</span></div>
                             </div>
                         </div>
                         <div>
-                            <h4 class="text-[10px] font-bold text-gray-500 uppercase tracking-[0.3em] mb-6">Escenarios (Backgrounds)</h4>
+                            <h4 class="text-[10px] font-bold text-gray-500 uppercase tracking-[0.3em] mb-6">Escenarios</h4>
                             <div class="asset-frame aspect-video border-white/5"><img src="https://raw.githubusercontent.com/FabrizioAtalaya/Portfolio/main/gateando%20por%20un%20t%C3%BAnel%20alcanzo%20lo%20que%20quiero/assets%20de%20background/Assets%20Background.jpg" class="w-full h-full object-cover"><span class="asset-label">Diseño de Entorno</span></div>
                         </div>
                     </div>
@@ -488,7 +486,7 @@
             </article>
         </div>
 
-        <!-- PÁGINA: FREELANCE HUB (RESTAURACIÓN TOTAL DE 16 PROYECTOS) -->
+        <!-- PÁGINA: FREELANCE HUB (RESTAURADA CON LOS 16 PROYECTOS) -->
         <div id="page-project-freelance" class="page-section">
             <div class="fixed top-28 left-6 md:left-12 z-40">
                 <button onclick="switchPage('home')" class="flex items-center gap-3 text-xs font-bold tracking-[0.2em] uppercase text-gray-400 hover:text-[var(--accent)] transition group"><i class="fas fa-arrow-left"></i> Volver al Inicio</button>
