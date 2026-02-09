@@ -199,7 +199,7 @@
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- 1. GRUPO CREDCO (TILE GRANDE - IZQUIERDA) -->
+                    <!-- 1. GRUPO CREDCO (TILE GRANDE - IZQUIERDA) [2023-2025] -->
                     <div onclick="switchPage('project-credco')" class="portfolio-item group md:row-span-2 block group relative overflow-hidden aspect-[4/5] bg-[#111] reveal">
                         <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200" class="w-full h-full object-cover">
                         <div class="project-overlay">
@@ -209,7 +209,7 @@
                         </div>
                     </div>
 
-                    <!-- 2. GEOSATELITAL (2022-2023) -->
+                    <!-- 2. GEOSATELITAL [2022-2023] -->
                     <div onclick="switchPage('project-geosatelital')" class="portfolio-item group block relative overflow-hidden aspect-video bg-[#111] reveal">
                         <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800" class="w-full h-full object-cover">
                         <div class="project-overlay">
@@ -219,7 +219,7 @@
                         </div>
                     </div>
 
-                    <!-- 3. REDSATEL (2021-2022) -->
+                    <!-- 3. REDSATEL [2021-2022] -->
                     <div onclick="switchPage('project-redsatel')" class="portfolio-item group block relative overflow-hidden aspect-video bg-[#111] reveal">
                         <img src="https://images.unsplash.com/photo-1580674285054-bed31e145f59?q=80&w=800" class="w-full h-full object-cover">
                         <div class="project-overlay">
@@ -229,7 +229,7 @@
                         </div>
                     </div>
 
-                    <!-- 4. SPEEDY GROUP (Minedu/Aprendo en Casa) -->
+                    <!-- 4. SPEEDY GROUP (Minedu/Aprendo en Casa) [2020-2021] -->
                     <div onclick="switchPage('aprendo')" class="portfolio-item group block relative overflow-hidden aspect-video bg-[#111] reveal">
                         <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=800" class="w-full h-full object-cover">
                         <div class="project-overlay">
@@ -339,13 +339,14 @@
             </article>
         </div>
 
-        <!-- PÁGINA: APRENDO EN CASA (FIX MINIATURAS Y ASSETS) -->
+        <!-- PÁGINA: APRENDO EN CASA (INTEGRACIÓN COMPLETA DE ASSETS) -->
         <div id="page-aprendo" class="page-section">
             <div class="fixed top-28 left-6 md:left-12 z-40">
                 <button onclick="switchPage('home')" class="flex items-center gap-3 text-xs font-bold tracking-[0.2em] uppercase text-gray-400 hover:text-[var(--aprendo-orange)] transition"><i class="fas fa-arrow-left"></i> Inicio</button>
             </div>
             
             <article class="pt-40 pb-24 container mx-auto px-6 md:px-12">
+                <!-- VISTA PRINCIPAL -->
                 <div id="aprendo-main-view">
                     <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-20 border-b border-white/5 pb-20">
                         <div class="md:col-span-4">
@@ -402,7 +403,7 @@
                         </div>
                     </div>
                     <div class="pt-10 border-t border-white/5">
-                        <h4 class="text-[10px] font-bold text-gray-500 uppercase tracking-[0.3em] mb-8 text-center">Character Design (Assets)</h4>
+                        <h4 class="text-[10px] font-bold text-gray-500 uppercase tracking-[0.3em] mb-8 text-center">Character Design (Assets GitHub)</h4>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                             <div class="asset-frame aspect-square border-white/5"><img src="https://raw.githubusercontent.com/FabrizioAtalaya/Portfolio/main/Hugo%20y%20las%20medias/Assets/Assets%20Hugo.jpg" class="w-full h-full object-contain"><span class="asset-label">Hugo</span></div>
                             <div class="asset-frame aspect-square border-white/5"><img src="https://raw.githubusercontent.com/FabrizioAtalaya/Portfolio/main/Hugo%20y%20las%20medias/Assets/Assets%20Ladr%C3%B3n.jpg" class="w-full h-full object-contain"><span class="asset-label">Ladrón</span></div>
@@ -433,17 +434,21 @@
                     </div>
                 </div>
 
-                <!-- DETALLE: TÚNEL -->
+                <!-- DETALLE: TÚNEL (RESTAURADO CON CODIFICACIÓN DE RUTAS) -->
                 <div id="sub-tunel" class="sub-project-content space-y-16">
                     <button onclick="hideAprendoProject()" class="text-xs font-bold text-gray-500 hover:text-[var(--aprendo-orange)] uppercase tracking-widest flex items-center gap-2 mb-10 transition"><i class="fas fa-arrow-left text-[10px]"></i> Volver</button>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="aspect-video bg-[#0a0a0a] border border-gray-900 shadow-xl overflow-hidden relative"><iframe class="w-full h-full" src="https://www.youtube.com/embed/Ym_8KLRZN90" title="Cuento Túnel" frameborder="0" allowfullscreen></iframe></div>
-                        <div class="aspect-video bg-[#0a0a0a] border border-gray-900 shadow-xl overflow-hidden relative"><iframe class="w-full h-full" src="https://www.youtube.com/embed/WtXUR6YOQzk" title="Canción Túnel" frameborder="0" allowfullscreen></iframe></div>
+                        <div class="aspect-video bg-[#0a0a0a] border border-gray-900 shadow-xl overflow-hidden relative">
+                            <iframe class="w-full h-full" src="https://www.youtube.com/embed/Ym_8KLRZN90" title="Cuento Cruzando el Túnel" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                        <div class="aspect-video bg-[#0a0a0a] border border-gray-900 shadow-xl overflow-hidden relative">
+                            <iframe class="w-full h-full" src="https://www.youtube.com/embed/WtXUR6YOQzk" title="Canción Cruzando el Túnel" frameborder="0" allowfullscreen></iframe>
+                        </div>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
                         <div>
                             <h3 class="text-xl font-bold text-[var(--aprendo-orange)] heading-font mb-4 uppercase">Integral: "Gateando por un túnel, alcanzo lo que quiero"</h3>
-                            <p class="text-gray-400 text-lg font-light leading-relaxed">Proyecto multiplataforma que combina narrativa visual y música dinámica.</p>
+                            <p class="text-gray-400 text-lg font-light leading-relaxed">Proyecto multiplataforma de estimulación temprana que combina narrativa visual y música dinámica.</p>
                         </div>
                         <div class="space-y-6">
                             <h4 class="text-xs font-bold tracking-widest text-white uppercase border-b border-[var(--aprendo-orange)] w-fit pb-1">Reto Técnico</h4>
@@ -452,14 +457,14 @@
                     </div>
                     <div class="pt-10 border-t border-white/5 space-y-10">
                         <div>
-                            <h4 class="text-[10px] font-bold text-gray-500 uppercase tracking-[0.3em] mb-6">Character Design</h4>
+                            <h4 class="text-[10px] font-bold text-gray-500 uppercase tracking-[0.3em] mb-6">Personajes</h4>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div class="asset-frame aspect-video border-white/5"><img src="https://raw.githubusercontent.com/FabrizioAtalaya/Portfolio/main/gateando%20por%20un%20t%C3%BAnel%20alcanzo%20lo%20que%20quiero/assets%20personajes/ni%C3%B1a.jpg" class="w-full h-full object-contain"><span class="asset-label">Niña</span></div>
                                 <div class="asset-frame aspect-video border-white/5"><img src="https://raw.githubusercontent.com/FabrizioAtalaya/Portfolio/main/gateando%20por%20un%20t%C3%BAnel%20alcanzo%20lo%20que%20quiero/assets%20personajes/ni%C3%B1o.jpg" class="w-full h-full object-contain"><span class="asset-label">Niño</span></div>
                             </div>
                         </div>
                         <div>
-                            <h4 class="text-[10px] font-bold text-gray-500 uppercase tracking-[0.3em] mb-6">Escenarios</h4>
+                            <h4 class="text-[10px] font-bold text-gray-500 uppercase tracking-[0.3em] mb-6">Escenarios (Backgrounds)</h4>
                             <div class="asset-frame aspect-video border-white/5"><img src="https://raw.githubusercontent.com/FabrizioAtalaya/Portfolio/main/gateando%20por%20un%20t%C3%BAnel%20alcanzo%20lo%20que%20quiero/assets%20de%20background/Assets%20Background.jpg" class="w-full h-full object-cover"><span class="asset-label">Diseño de Entorno</span></div>
                         </div>
                     </div>
