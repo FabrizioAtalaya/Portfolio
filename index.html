@@ -1,838 +1,1235 @@
 <!DOCTYPE html>
+
 <html lang="es" class="scroll-smooth">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Fabrizio Atalaya | Director Creativo</title>
+
     <script src="https://cdn.tailwindcss.com"></script>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
+
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600&family=Oswald:wght@400;500;700&display=swap" rel="stylesheet">
 
+
+
     <style>
+
         :root {
+
             --bg-color: #050505;
+
             --card-bg: #0f0f0f;
+
             --text-main: #e0e0e0;
-            --accent: #ff3300; /* Rojo Fabrizio */
+
+            --accent: #ff3300;
+
+            --redsatel-blue: #0056b3; 
+
+            --geosatelital-blue: #1e3a8a; 
+
+            --speedy-blue: #0088cc;
+
+            --credco-blue: #2c3e50; 
+
+            --aprendo-orange: #ffcc00; 
+
         }
+
+
 
         body {
+
             background-color: var(--bg-color);
+
             color: var(--text-main);
+
             font-family: 'Manrope', sans-serif;
+
             overflow-x: hidden;
+
         }
+
+
 
         h1, h2, h3, h4, .heading-font {
+
             font-family: 'Oswald', sans-serif;
+
             text-transform: uppercase;
+
         }
+
+
 
         /* --- SISTEMA DE TRANSICIÓN SPA --- */
+
         #transition-overlay {
+
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+
             background-color: var(--accent); z-index: 10000;
+
             display: flex; align-items: center; justify-content: center;
+
             pointer-events: none;
+
             transform: translateY(100%); 
+
             transition: transform 0.8s cubic-bezier(0.85, 0, 0.15, 1);
+
         }
+
         
+
         #transition-overlay.active { transform: translateY(0%); pointer-events: all; }
+
         #transition-overlay.exit { transform: translateY(-100%); }
+
         .no-transition { transition: none !important; }
 
+
+
         .transition-brand {
+
             font-family: 'Oswald', sans-serif; font-size: 5rem; font-weight: 900; color: black;
+
             opacity: 0; transform: translateY(30px) scale(0.9); 
+
             transition: all 0.5s cubic-bezier(0.215, 0.61, 0.355, 1) 0.1s;
+
         }
+
         #transition-overlay.active .transition-brand { opacity: 1; transform: translateY(0) scale(1); }
 
+
+
         /* --- ANIMACIÓN BOTÓN SHOWREEL --- */
+
         .reel-btn-container { position: relative; display: inline-flex; align-items: center; justify-content: center; }
+
         .reel-btn-pulse {
+
             position: absolute; width: 100%; height: 100%; border-radius: 9999px;
+
             border: 1px solid var(--accent); opacity: 0;
+
             animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+
         }
+
         @keyframes pulse-ring { 0% { transform: scale(0.9); opacity: 1; } 100% { transform: scale(1.5); opacity: 0; } }
 
+
+
         /* LOGICA DE PÁGINAS */
+
         .page-section { display: none; opacity: 0; }
+
         .page-section.active-page { display: block; animation: fadeInPage 0.8s cubic-bezier(0.65, 0, 0.35, 1) forwards; }
+
         @keyframes fadeInPage { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
+
+
         /* ANIMACIÓN DE REVELADO */
+
         .reveal { opacity: 0; transform: translateY(40px); transition: all 1s cubic-bezier(0.215, 0.61, 0.355, 1); }
+
         .reveal.active { opacity: 1; transform: translateY(0); }
 
+
+
         /* Cursor Custom */
+
         .custom-cursor {
+
             width: 20px; height: 20px; border: 1px solid white; border-radius: 50%;
+
             position: fixed; pointer-events: none; z-index: 9999;
+
             transform: translate(-50%, -50%); transition: width 0.3s, height 0.3s, background-color 0.3s; mix-blend-mode: difference;
+
         }
+
+
 
         /* Navbar */
+
         nav.scrolled { background-color: rgba(5, 5, 5, 0.95); padding: 1rem 2rem; backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05); }
 
+
+
         /* Portafolio Interactivo */
+
         .portfolio-item { cursor: pointer; overflow: hidden; position: relative; background-color: #000; }
+
         .portfolio-item img {
+
             transition: all 0.8s cubic-bezier(0.215, 0.61, 0.355, 1);
+
             filter: grayscale(100%); opacity: 0.4;
+
         }
+
         .portfolio-item:hover img { transform: scale(1.05); filter: grayscale(0%); opacity: 1; }
+
         .project-overlay { 
+
             position: absolute; inset: 0;
+
             background: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 60%, rgba(0,0,0,0) 100%); 
+
             display: flex; flex-direction: column; justify-content: end; padding: 2rem;
+
         }
+
+
 
         /* Asset Frames */
+
         .asset-frame {
+
             background-color: #0a0a0a; border: 1px solid #1a1a1a; overflow: hidden; position: relative;
+
             transition: all 0.3s ease; display: flex; align-items: center; justify-content: center;
+
         }
+
         .asset-frame:hover { border-color: var(--accent); background-color: #0f0f0f; }
+
         .asset-label { position: absolute; bottom: 10px; left: 10px; font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; color: #444; font-weight: bold; }
+
         .asset-icon { font-size: 1.5rem; color: #222; transition: color 0.3s ease; }
 
+
+
         /* Grid Info */
+
         .info-grid {
+
             display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;
+
             border-top: 1px solid rgba(255,255,255,0.05); padding-top: 2rem; margin-top: 2rem;
+
         }
+
         .info-item { display: flex; flex-direction: column; gap: 0.25rem; }
-        .info-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--accent); font-weight: 800; }
+
+        .info-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.2em; color: #555; font-weight: 800; }
+
         .info-value { font-size: 13px; color: #ccc; }
 
-        /* Modal Safe State */
-        #quote-modal { position: fixed; inset: 0; z-index: 9999; display: none !important; align-items: center; justify-content: center; background-color: rgba(0,0,0,0.9); backdrop-filter: blur(10px); }
-        #quote-modal.active { display: flex !important; }
+
+
+        /* Modal */
+
+        #quote-modal { position: fixed; inset: 0; z-index: 1000; display: none; align-items: center; justify-content: center; background-color: rgba(0,0,0,0.9); backdrop-filter: blur(10px); }
+
+        #quote-modal.active { display: flex; }
+
         .form-input { width: 100%; background-color: #050505; border: 1px solid #333; padding: 12px 16px; color: white; outline: none; }
+
         .form-input:focus { border-color: var(--accent); }
 
+
+
         /* Sub-Proyectos Internos */
+
         .sub-project-content { display: none; }
+
         .sub-project-content.active { display: block; animation: fadeInSub 0.6s ease-out forwards; }
+
         @keyframes fadeInSub { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
+
+
         @media (max-width: 768px) { .transition-brand { font-size: 3rem; } }
+
     </style>
+
 </head>
+
 <body>
 
+
+
     <!-- TRANSICIÓN -->
+
     <div id="transition-overlay"><div class="transition-brand">FABRIZIO ATALAYA</div></div>
 
+
+
     <!-- MODAL COTIZACIÓN -->
+
     <div id="quote-modal">
-        <div class="absolute inset-0 bg-transparent" onclick="closeModal()"></div>
-        <div class="modal-box w-full max-w-lg bg-[#111] border border-gray-800 p-8 md:p-10 relative z-50 shadow-2xl">
+
+        <div class="absolute inset-0" onclick="closeModal()"></div>
+
+        <div class="modal-box w-full max-w-lg bg-[#111] border border-gray-800 p-8 md:p-10 relative z-10 shadow-2xl">
+
             <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-500 hover:text-white transition text-xl"><i class="fas fa-times"></i></button>
+
             <h2 class="text-3xl font-bold text-white heading-font mb-2">Iniciar <span class="text-[var(--accent)]">Proyecto</span></h2>
+
             <form onsubmit="submitForm(event)" class="space-y-4">
+
                 <input type="text" id="form-name" required class="form-input" placeholder="Nombre completo">
+
                 <input type="email" id="form-email" required class="form-input" placeholder="Email">
+
                 <select id="form-service" class="form-input">
+
                     <option>Motion Graphics & Video</option>
+
                     <option>Diseño Gráfico & Branding</option>
+
                 </select>
+
                 <textarea id="form-details" rows="3" class="form-input" placeholder="Detalles del proyecto..."></textarea>
+
                 <button type="submit" class="w-full mt-4 bg-[var(--accent)] text-black py-4 font-bold uppercase tracking-widest hover:bg-white transition duration-300">Enviar a WhatsApp</button>
+
             </form>
+
         </div>
+
     </div>
+
+
 
     <div id="cursor" class="custom-cursor hidden md:block"></div>
 
+
+
     <!-- NAVEGACIÓN -->
+
     <nav class="fixed top-0 w-full z-50 px-6 md:px-12 py-8 flex justify-between items-center transition-all duration-300">
+
         <div onclick="switchPage('home')" class="cursor-pointer text-xl font-bold tracking-widest heading-font z-50 uppercase">
+
             F<span class="text-[var(--accent)]">.</span>Atalaya
+
         </div>
+
         <div class="hidden md:flex gap-10 text-[11px] font-bold tracking-[0.2em] uppercase z-50 text-gray-400">
+
             <button onclick="switchPage('home')" class="hover:text-white transition">Inicio</button>
+
             <button onclick="navigateToWork()" class="hover:text-white transition">Proyectos</button>
+
             <button onclick="switchPage('services')" class="hover:text-white transition">Servicios</button>
+
             <button onclick="switchPage('about')" class="hover:text-white transition">Sobre Mí</button>
+
         </div>
+
     </nav>
+
+
 
     <div id="main-content">
 
-        <!-- PÁGINA: INICIO (GRID DE IMPACTO TOTAL) -->
+
+
+        <!-- PÁGINA: INICIO -->
+
         <div id="page-home" class="page-section active-page text-center">
+
             <header class="relative w-full h-screen flex flex-col justify-center items-center text-center px-4 overflow-hidden">
+
                 <div class="absolute inset-0 z-0">
+
                      <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2000&auto=format&fit=crop" class="w-full h-full object-cover opacity-20" alt="Background">
+
                      <div class="absolute inset-0 bg-gradient-to-b from-[#050505] via-transparent to-[#050505]"></div>
+
                 </div>
+
                 <div class="relative z-10">
+
                     <h1 class="text-6xl md:text-9xl font-bold leading-none tracking-tighter text-white mb-10 uppercase">Crafting<br>Motion</h1>
+
                     
+
                     <a onclick="switchPage('project')" class="reel-btn-container group cursor-pointer">
+
                         <div class="reel-btn-pulse"></div>
+
                         <div class="reel-btn-pulse" style="animation-delay: 0.5s"></div>
+
                         <div class="relative bg-black/40 backdrop-blur-md border border-white/20 px-10 py-5 rounded-full flex items-center gap-4 transition-all duration-300 group-hover:bg-[var(--accent)] group-hover:border-[var(--accent)] group-hover:scale-105">
+
                             <span class="w-6 h-6 rounded-full bg-white flex items-center justify-center text-black"><i class="fas fa-play text-[8px] ml-0.5"></i></span>
+
                             <span class="text-xs font-bold tracking-[0.2em] uppercase text-white group-hover:text-black">Ver Showreel 2026</span>
+
                         </div>
+
                     </a>
+
                 </div>
+
             </header>
+
+
 
             <main id="work" class="py-32 container mx-auto px-6 md:px-12 text-left">
+
                 <div class="mb-16 reveal">
-                    <h2 class="text-4xl md:text-5xl font-bold heading-font text-white mb-4 uppercase">Featured <span class="text-gray-600">Portfolio</span></h2>
-                    <p class="text-gray-500 text-sm max-w-lg uppercase tracking-widest font-bold">Proyectos Corporativos & Freelance</p>
+
+                    <h2 class="text-4xl md:text-5xl font-bold heading-font text-white mb-4 uppercase">Trabajos <span class="text-gray-600">Recientes</span></h2>
+
+                    <p class="text-gray-500 text-sm max-w-lg uppercase tracking-widest font-bold">Portafolio Profesional 2021 — 2026</p>
+
                 </div>
+
+
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- 1. GRUPO CREDCO (IN-HOUSE) -->
+
+                    <!-- 1. GRUPO CREDCO (IZQUIERDA) -->
+
                     <div onclick="switchPage('project-credco')" class="portfolio-item group md:row-span-2 block group relative overflow-hidden aspect-[4/5] bg-[#111] reveal">
+
                         <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200" class="w-full h-full object-cover">
+
                         <div class="project-overlay">
+
                             <span class="text-[var(--accent)] text-[10px] font-bold uppercase mb-2 tracking-[0.3em]">Ingeniería & Arquitectura</span>
+
                             <h3 class="text-2xl md:text-3xl font-bold text-white heading-font uppercase">Grupo Credco</h3>
+
                             <p class="text-gray-400 text-[10px] font-bold uppercase mt-4 border-t border-white/10 pt-4 w-fit">In-House / 2023 - 2025</p>
+
                         </div>
+
                     </div>
 
-                    <!-- 2. GEOSATELITAL (IN-HOUSE) -->
+
+
+                    <!-- 2. GEOSATELITAL -->
+
                     <div onclick="switchPage('project-geosatelital')" class="portfolio-item group block relative overflow-hidden aspect-video bg-[#111] reveal">
+
                         <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800" class="w-full h-full object-cover">
+
                         <div class="project-overlay">
-                            <span class="text-[var(--accent)] text-[10px] font-bold uppercase mb-1 tracking-widest">Tecnología Satelital</span>
+
+                            <span class="text-[var(--accent)] text-[10px] font-bold uppercase mb-1 tracking-widest">Soporte Freelance</span>
+
                             <h3 class="text-xl font-bold text-white heading-font uppercase">GeoSatelital</h3>
-                            <p class="text-gray-400 text-[10px] font-bold uppercase mt-2 w-fit">In-House / 2022 - 2023</p>
+
+                            <p class="text-gray-400 text-[10px] font-bold uppercase mt-4 border-t border-white/10 pt-4 w-fit">Soporte Externo / 2022 - 2023</p>
+
                         </div>
+
                     </div>
 
-                    <!-- 3. REDSATEL (IN-HOUSE) -->
+
+
+                    <!-- 3. REDSATEL -->
+
                     <div onclick="switchPage('project-redsatel')" class="portfolio-item group block relative overflow-hidden aspect-video bg-[#111] reveal">
+
                         <img src="https://images.unsplash.com/photo-1580674285054-bed31e145f59?q=80&w=800" class="w-full h-full object-cover">
+
                         <div class="project-overlay">
+
                             <span class="text-[var(--accent)] text-[10px] font-bold uppercase mb-1 tracking-widest">Tecnología GPS</span>
+
                             <h3 class="text-xl font-bold text-white heading-font uppercase">RedSatel Perú</h3>
-                            <p class="text-gray-400 text-[10px] font-bold uppercase mt-2 w-fit">In-House / 2021 - 2022</p>
+
+                            <p class="text-gray-400 text-[10px] font-bold uppercase mt-4 border-t border-white/10 pt-4 w-fit">In-House / 2021 - 2022</p>
+
                         </div>
+
                     </div>
 
-                    <!-- 4. SPEEDY GROUP (IN-HOUSE) -->
+
+
+                    <!-- 4. SPEEDY GROUP (Minedu/Aprendo en Casa) -->
+
                     <div onclick="switchPage('aprendo')" class="portfolio-item group block relative overflow-hidden aspect-video bg-[#111] reveal">
+
                         <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=800" class="w-full h-full object-cover">
+
                         <div class="project-overlay">
-                            <span class="text-[var(--accent)] text-[10px] font-bold uppercase mb-1 tracking-widest">Minedu / TV Perú</span>
+
+                            <span class="text-[var(--aprendo-orange)] text-[10px] font-bold uppercase mb-1 tracking-widest">Minedu / TV Perú</span>
+
                             <h3 class="text-xl font-bold text-white heading-font uppercase">Speedy Group</h3>
-                            <p class="text-gray-400 text-[10px] font-bold uppercase mt-2 w-fit">In-House / 2020 - 2021</p>
+
+                            <p class="text-gray-400 text-[10px] font-bold uppercase mt-4 border-t border-white/10 pt-4 w-fit">In-House / 2020 - 2021</p>
+
                         </div>
+
                     </div>
 
-                    <!-- 5. AZALEIA PERÚ (FREELANCE - TILE GRANDE) -->
-                    <div class="portfolio-item group md:row-span-2 block group relative overflow-hidden aspect-[4/5] bg-[#111] reveal">
-                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=1200" class="w-full h-full object-cover">
+
+
+                    <!-- 5. FREELANCE HUB (DERECHA) -->
+
+                    <div onclick="switchPage('project-freelance')" class="portfolio-item group md:row-span-2 block group relative overflow-hidden aspect-[4/5] bg-[#111] reveal">
+
+                        <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=1200" class="w-full h-full object-cover">
+
                         <div class="project-overlay">
-                            <span class="text-[var(--accent)] text-[10px] font-bold uppercase mb-2 tracking-[0.3em]">Calzado / Moda</span>
-                            <h3 class="text-2xl md:text-3xl font-bold text-white heading-font uppercase">Azaleia Perú</h3>
-                            <p class="text-gray-400 text-[10px] font-bold uppercase mt-4 border-t border-white/10 pt-4 w-fit">Freelance</p>
+
+                            <span class="text-[var(--accent)] text-[10px] font-bold uppercase mb-2 tracking-[0.3em]">Corporativo & Retail</span>
+
+                            <h3 class="text-2xl md:text-3xl font-bold text-white heading-font uppercase">Freelance Hub</h3>
+
+                            <p class="text-gray-400 text-[10px] font-bold uppercase mt-4 border-t border-white/10 pt-4 w-fit">Proyectos Independientes</p>
+
                         </div>
+
                     </div>
 
-                    <!-- 6. RECAMIER (FREELANCE) -->
-                    <div onclick="switchPage('project-recamier')" class="portfolio-item group block relative overflow-hidden aspect-video bg-[#111] reveal">
-                        <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=800" class="w-full h-full object-cover">
-                        <div class="project-overlay">
-                            <span class="text-[var(--accent)] text-[10px] font-bold uppercase mb-1 tracking-widest">Beauty & Professional</span>
-                            <h3 class="text-xl font-bold text-white heading-font uppercase">Recamier</h3>
-                            <p class="text-gray-400 text-[10px] font-bold uppercase mt-2">Freelance</p>
-                        </div>
-                    </div>
-
-                    <!-- 7. PAPA JOHN'S (FREELANCE) -->
-                    <div class="portfolio-item group aspect-video reveal">
-                        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=800" class="w-full h-full object-cover">
-                        <div class="project-overlay">
-                            <span class="text-[var(--accent)] text-[10px] font-bold uppercase mb-1">Retail</span>
-                            <h3 class="text-xl font-bold text-white heading-font">Papa John's</h3>
-                            <p class="text-gray-400 text-[10px] font-bold uppercase mt-1">Freelance</p>
-                        </div>
-                    </div>
-
-                    <!-- 8. ATALAYA PIZZAS Y CONO (FREELANCE) -->
-                    <div class="portfolio-item group aspect-video reveal">
-                        <img src="https://images.unsplash.com/photo-1590947132387-155cc02f3212?q=80&w=800" class="w-full h-full object-cover">
-                        <div class="project-overlay">
-                            <span class="text-[var(--accent)] text-[10px] font-bold uppercase mb-1">Food Retail</span>
-                            <h3 class="text-xl font-bold text-white heading-font">Atalaya Pizzas y cono</h3>
-                            <p class="text-gray-400 text-[10px] font-bold uppercase mt-1">Freelance</p>
-                        </div>
-                    </div>
-
-                    <!-- 9. SPA & WELLNESS (FREELANCE) -->
-                    <div class="portfolio-item group aspect-video reveal">
-                        <img src="https://images.unsplash.com/photo-1544161515-4af6b1d4640b?q=80&w=800" class="w-full h-full object-cover">
-                        <div class="project-overlay">
-                            <span class="text-[var(--accent)] text-[10px] font-bold uppercase mb-1">Wellness</span>
-                            <h3 class="text-xl font-bold text-white heading-font">Spa & Wellness</h3>
-                            <p class="text-gray-400 text-[10px] font-bold uppercase mt-1">Freelance</p>
-                        </div>
-                    </div>
-
-                    <!-- 10. MILUSKA BOUTIQUE (FREELANCE) -->
-                    <div class="portfolio-item group aspect-video reveal">
-                        <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=800" class="w-full h-full object-cover">
-                        <div class="project-overlay">
-                            <span class="text-[var(--accent)] text-[10px] font-bold uppercase mb-1">Moda</span>
-                            <h3 class="text-xl font-bold text-white heading-font">Miluska Boutique</h3>
-                            <p class="text-gray-400 text-[10px] font-bold uppercase mt-1">Freelance</p>
-                        </div>
-                    </div>
-
-                    <!-- 11. OPEN PLAZA (FREELANCE) -->
-                    <div class="portfolio-item group aspect-video reveal">
-                        <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?q=80&w=800" class="w-full h-full object-cover">
-                        <div class="project-overlay">
-                            <span class="text-[var(--accent)] text-[10px] font-bold uppercase mb-1">Malls / Retail</span>
-                            <h3 class="text-xl font-bold text-white heading-font">Open Plaza</h3>
-                            <p class="text-gray-400 text-[10px] font-bold uppercase mt-1">Freelance</p>
-                        </div>
-                    </div>
-
-                    <!-- 12. PROYECTO INMOBILIARIO (FREELANCE) -->
-                    <div class="portfolio-item group aspect-video reveal">
-                        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=800" class="w-full h-full object-cover">
-                        <div class="project-overlay">
-                            <span class="text-[var(--accent)] text-[10px] font-bold uppercase mb-1">Bienes Raíces</span>
-                            <h3 class="text-xl font-bold text-white heading-font">Proyecto Inmobiliario</h3>
-                            <p class="text-gray-400 text-[10px] font-bold uppercase mt-1">Freelance</p>
-                        </div>
-                    </div>
-
-                    <!-- 13. ESTUDIO JURÍDICO (FREELANCE) -->
-                    <div class="portfolio-item group aspect-video reveal">
-                        <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=800" class="w-full h-full object-cover">
-                        <div class="project-overlay">
-                            <span class="text-[var(--accent)] text-[10px] font-bold uppercase mb-1">Legal</span>
-                            <h3 class="text-xl font-bold text-white heading-font">Estudio Jurídico</h3>
-                            <p class="text-gray-400 text-[10px] font-bold uppercase mt-1">Freelance</p>
-                        </div>
-                    </div>
-
-                    <!-- 14. BODAS & EVENTOS (FREELANCE) -->
-                    <div class="portfolio-item group aspect-video reveal">
-                        <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=800" class="w-full h-full object-cover">
-                        <div class="project-overlay">
-                            <span class="text-[var(--accent)] text-[10px] font-bold uppercase mb-1">Social Events</span>
-                            <h3 class="text-xl font-bold text-white heading-font">Bodas & Eventos</h3>
-                            <p class="text-gray-400 text-[10px] font-bold uppercase mt-1">Freelance</p>
-                        </div>
-                    </div>
-
-                    <!-- 15. PIZZAS DI KARLA (FREELANCE) -->
-                    <div class="portfolio-item group aspect-video reveal">
-                        <img src="https://images.unsplash.com/photo-1574129624535-649069d2753a?q=80&w=800" class="w-full h-full object-cover">
-                        <div class="project-overlay">
-                            <span class="text-[var(--accent)] text-[10px] font-bold uppercase mb-1">Food Retail</span>
-                            <h3 class="text-xl font-bold text-white heading-font">Pizzas Di Karla</h3>
-                            <p class="text-gray-400 text-[10px] font-bold uppercase mt-1">Freelance</p>
-                        </div>
-                    </div>
-
-                    <!-- 16. BIOSHORP (FREELANCE) -->
-                    <div class="portfolio-item group aspect-video reveal">
-                        <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?q=80&w=800" class="w-full h-full object-cover">
-                        <div class="project-overlay">
-                            <span class="text-[var(--accent)] text-[10px] font-bold uppercase mb-1">Suplementos</span>
-                            <h3 class="text-xl font-bold text-white heading-font">Bioshorp</h3>
-                            <p class="text-gray-400 text-[10px] font-bold uppercase mt-1">Freelance</p>
-                        </div>
-                    </div>
-
-                    <!-- 17. CLÍNICA AUTOMOTRIZ (FREELANCE) -->
-                    <div class="portfolio-item group aspect-video reveal">
-                        <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?q=80&w=800" class="w-full h-full object-cover">
-                        <div class="project-overlay">
-                            <span class="text-[var(--accent)] text-[10px] font-bold uppercase mb-1">Automotriz</span>
-                            <h3 class="text-xl font-bold text-white heading-font">Clínica Automotriz</h3>
-                            <p class="text-gray-400 text-[10px] font-bold uppercase mt-1">Freelance</p>
-                        </div>
-                    </div>
-
-                    <!-- 18. EBAKER (FREELANCE) -->
-                    <div class="portfolio-item group aspect-video reveal">
-                        <img src="https://images.unsplash.com/photo-1558981403-c5f91cbba527?q=80&w=800" class="w-full h-full object-cover">
-                        <div class="project-overlay">
-                            <span class="text-[var(--accent)] text-[10px] font-bold uppercase mb-1">Motos</span>
-                            <h3 class="text-xl font-bold text-white heading-font">eBaker</h3>
-                            <p class="text-gray-400 text-[10px] font-bold uppercase mt-1">Freelance</p>
-                        </div>
-                    </div>
-
-                    <!-- 19. RSC TV ONLINE (FREELANCE) -->
-                    <div class="portfolio-item group aspect-video reveal">
-                        <img src="https://images.unsplash.com/photo-1495020689067-958852a7765e?q=80&w=800" class="w-full h-full object-cover">
-                        <div class="project-overlay">
-                            <span class="text-[var(--accent)] text-[10px] font-bold uppercase mb-1">Digital TV</span>
-                            <h3 class="text-xl font-bold text-white heading-font">RSC TV Online</h3>
-                            <p class="text-gray-400 text-[10px] font-bold uppercase mt-1">Freelance</p>
-                        </div>
-                    </div>
-
-                    <!-- 20. LA REINA (FREELANCE) -->
-                    <div class="portfolio-item group aspect-video reveal">
-                        <img src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=800" class="w-full h-full object-cover">
-                        <div class="project-overlay">
-                            <span class="text-[var(--accent)] text-[10px] font-bold uppercase mb-1">Gastronomía</span>
-                            <h3 class="text-xl font-bold text-white heading-font">La Reina</h3>
-                            <p class="text-gray-400 text-[10px] font-bold uppercase mt-1">Freelance</p>
-                        </div>
-                    </div>
-
-                    <!-- 21. PROYECTO VETERINARIO (FREELANCE) -->
-                    <div class="portfolio-item group aspect-video reveal">
-                        <img src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?q=80&w=800" class="w-full h-full object-cover">
-                        <div class="project-overlay">
-                            <span class="text-[var(--accent)] text-[10px] font-bold uppercase mb-1">Veterinaria</span>
-                            <h3 class="text-xl font-bold text-white heading-font">Proyecto Veterinario</h3>
-                            <p class="text-gray-400 text-[10px] font-bold uppercase mt-1">Freelance</p>
-                        </div>
-                    </div>
                 </div>
+
             </main>
+
         </div>
+
+
 
         <!-- PÁGINA: DETALLE SHOWREEL -->
+
         <div id="page-project" class="page-section">
+
             <div class="fixed top-28 left-6 md:left-12 z-40">
+
                 <button onclick="switchPage('home')" class="flex items-center gap-3 text-xs font-bold tracking-[0.2em] uppercase text-gray-400 hover:text-[var(--accent)] transition group"><i class="fas fa-arrow-left transition-transform group-hover:-translate-x-1"></i> Volver</button>
+
             </div>
+
             <article class="pt-40 pb-24 container mx-auto px-6 md:px-12 text-left">
+
                 <div class="w-full aspect-video bg-[#111] border border-gray-900 mb-12 overflow-hidden relative shadow-2xl">
+
                     <iframe class="w-full h-full object-cover" src="https://www.youtube.com/embed/2ntPC4qcaR0" title="Fabricio Atalaya Reel" frameborder="0" allowfullscreen></iframe>
+
                 </div>
+
                 <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-24">
+
                     <div class="md:col-span-4">
+
                         <h1 class="text-5xl md:text-7xl font-bold text-white heading-font mb-6 leading-none uppercase">FABRIZIO <br> <span class="text-gray-700">ATALAYA</span></h1>
+
                         <div class="space-y-4 text-xs font-mono border-t border-gray-800 pt-6 uppercase">
+
                             <div class="flex justify-between"><span class="text-gray-500">Cargo</span><span class="text-white">Post-productor</span></div>
+
                             <div class="flex justify-between"><span class="text-gray-500">Especialidad</span><span class="text-white">Comunicación Visual</span></div>
+
                             <div class="flex justify-between"><span class="text-gray-500">Año</span><span class="text-white">2026</span></div>
+
                         </div>
+
                     </div>
-                    <div class="md:col-span-8 border-l border-white/5 pl-0 md:pl-12 pt-4">
-                        <h3 class="text-xl font-bold text-[var(--accent)] mb-4 heading-font uppercase">Visión Estratégica</h3>
+
+                    <div class="md:col-span-8">
+
+                        <h3 class="text-xl font-bold text-white mb-4 heading-font uppercase">Visión Estratégica</h3>
+
                         <p class="text-gray-400 leading-relaxed mb-10 font-light text-lg">Profesionalizar la comunicación visual mediante la integración de técnica audiovisual avanzada y procesos optimizados con Inteligencia Artificial.</p>
-                        <h3 class="text-xl font-bold text-[var(--accent)] mb-4 heading-font uppercase">Propuesta de Valor</h3>
+
+                        <h3 class="text-xl font-bold text-white mb-4 heading-font uppercase">Propuesta de Valor</h3>
+
                         <p class="text-gray-400 leading-relaxed font-light text-lg">Desarrollo y ejecuto proyectos audiovisuales con un enfoque en resultados tangibles, desde el crecimiento de audiencias orgánicas hasta la reestructuración de identidades corporativas.</p>
+
                     </div>
+
                 </div>
+
             </article>
+
         </div>
 
-        <!-- PÁGINA: DETALLE RECAMIER -->
-        <div id="page-project-recamier" class="page-section">
+
+
+        <!-- PÁGINA: DETALLE GRUPO CREDCO -->
+
+        <div id="page-project-credco" class="page-section">
+
             <div class="fixed top-28 left-6 md:left-12 z-40">
+
                 <button onclick="switchPage('home')" class="flex items-center gap-3 text-xs font-bold tracking-[0.2em] uppercase text-gray-400 hover:text-[var(--accent)] transition"><i class="fas fa-arrow-left"></i> Volver</button>
+
             </div>
+
             <article class="pt-40 pb-24 container mx-auto px-6 md:px-12 text-left">
+
                 <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-20 border-b border-white/5 pb-20">
+
                     <div class="md:col-span-4">
-                        <h1 class="text-5xl font-bold text-white heading-font leading-none uppercase">Recamier<br><span class="text-gray-500">Professional</span></h1>
+
+                        <h1 class="text-5xl font-bold text-white heading-font leading-none uppercase">Grupo<br><span class="text-[var(--credco-blue)]">Credco</span></h1>
+
                         <div class="info-grid uppercase">
-                            <div class="info-item"><span class="info-label">Cargo</span><span class="info-value">Motion Designer / Editor</span></div>
-                            <div class="info-item"><span class="info-label">Modalidad</span><span class="info-value">Freelance</span></div>
+
+                            <div class="info-item"><span class="info-label">Cargo</span><span class="info-value">Diseñador Gráfico & Especialista Audiovisual</span></div>
+
+                            <div class="info-item"><span class="info-label">Modalidad</span><span class="info-value">In-House (2023 - 2025)</span></div>
+
                         </div>
+
                     </div>
+
                     <div class="md:col-span-8 border-l border-white/5 pl-0 md:pl-12 pt-4">
-                        <h3 class="text-xl font-bold text-[var(--accent)] mb-6 heading-font uppercase">Excelencia Visual en Belleza</h3>
-                        <p class="text-gray-400 text-lg leading-relaxed font-light">Desarrollo de piezas audiovisuales orientadas al sector profesional de belleza. Se priorizó una estética sofisticada para destacar los valores de la marca en plataformas digitales.</p>
+
+                        <h3 class="text-xl font-bold text-[var(--accent)] mb-6 heading-font uppercase">Aporte y Resultados</h3>
+
+                        <ul class="space-y-4 text-gray-400 font-light text-lg leading-relaxed list-disc list-outside ml-4">
+
+                            <li>Reestructuración de Identidad: Estandarización completa de la identidad visual corporativa.</li>
+
+                            <li>Estrategia LinkedIn: Liderazgo de contenidos logrando posicionar a la marca en el Top 10 sectorial.</li>
+
+                        </ul>
+
                     </div>
+
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="aspect-video bg-black border border-white/10 rounded-lg overflow-hidden shadow-2xl"><iframe class="w-full h-full" src="https://www.youtube.com/embed/ZKVAi3AXrMU" frameborder="0" allowfullscreen></iframe></div>
-                    <div class="aspect-video bg-black border border-white/10 rounded-lg overflow-hidden shadow-2xl"><iframe class="w-full h-full" src="https://www.youtube.com/embed/81MarHhJUZ4" frameborder="0" allowfullscreen></iframe></div>
-                    <div class="aspect-video bg-black border border-white/10 rounded-lg overflow-hidden shadow-2xl"><iframe class="w-full h-full" src="https://www.youtube.com/embed/mWjgIk8IjVU" frameborder="0" allowfullscreen></iframe></div>
-                    <div class="aspect-video bg-black border border-white/10 rounded-lg overflow-hidden shadow-2xl"><iframe class="w-full h-full" src="https://www.youtube.com/embed/wKOh4Uo0v6w" frameborder="0" allowfullscreen></iframe></div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                    <div class="asset-frame aspect-video"><i class="fas fa-cogs asset-icon"></i><span class="asset-label uppercase">Simulación Ingeniería</span></div>
+
+                    <div class="asset-frame aspect-video"><i class="fas fa-book asset-icon"></i><span class="asset-label uppercase">Editorial Asset</span></div>
+
                 </div>
+
             </article>
+
         </div>
 
-        <!-- PÁGINA: DETALLE GEOSATELITAL -->
-        <div id="page-project-geosatelital" class="page-section">
-            <div class="fixed top-28 left-6 md:left-12 z-40">
-                <button onclick="switchPage('home')" class="flex items-center gap-3 text-xs font-bold tracking-[0.2em] uppercase text-gray-400 hover:text-[var(--accent)] transition"><i class="fas fa-arrow-left"></i> Volver</button>
-            </div>
-            <article class="pt-40 pb-24 container mx-auto px-6 md:px-12 text-left">
-                <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-20 border-b border-white/5 pb-20">
-                    <div class="md:col-span-4">
-                        <h1 class="text-5xl font-bold text-white heading-font leading-none uppercase">Geo<br><span class="text-gray-500">Satelital</span></h1>
-                        <div class="info-grid uppercase">
-                            <div class="info-item"><span class="info-label">Cargo</span><span class="info-value">Aliado Estratégico Externo</span></div>
-                            <div class="info-item"><span class="info-label">Modalidad</span><span class="info-value">In-House / 2022 - 2023</span></div>
-                        </div>
-                    </div>
-                    <div class="md:col-span-8 border-l border-white/5 pl-0 md:pl-12 pt-4">
-                        <h3 class="text-xl font-bold text-[var(--accent)] mb-6 heading-font uppercase">Campañas Digitales & Ads</h3>
-                        <p class="text-gray-400 text-lg leading-relaxed font-light">Gestión de contenido dinámico para plataformas sociales vehicular y satelital.</p>
-                    </div>
-                </div>
 
-                <div class="mb-24">
-                    <h4 class="text-[10px] font-bold text-[var(--accent)] uppercase tracking-[0.4em] mb-10 border-b border-white/5 pb-4">Priority Highlights</h4>
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        <div class="aspect-[9/16] bg-black border border-white/10 rounded-lg overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/zm-sNc46b6M" frameborder="0" allowfullscreen></iframe></div>
-                        <div class="aspect-[9/16] bg-black border border-white/10 rounded-lg overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/--wWso5HYEU" frameborder="0" allowfullscreen></iframe></div>
-                        <div class="aspect-[9/16] bg-black border border-white/10 rounded-lg overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/YeAi6m12chc" frameborder="0" allowfullscreen></iframe></div>
-                        <div class="aspect-[9/16] bg-black border border-white/10 rounded-lg overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/0WwdVt2yA4Y" frameborder="0" allowfullscreen></iframe></div>
-                    </div>
-                </div>
 
-                <h4 class="text-[10px] font-bold text-[var(--accent)] uppercase tracking-[0.4em] mb-10 border-b border-white/5 pb-4">Full Motion Portfolio</h4>
-                <div class="grid grid-cols-2 md:grid-cols-6 gap-3">
-                    <div class="aspect-[9/16] bg-black border border-white/5 overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/6lXKlG4tnGA" frameborder="0"></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/5 overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/AQgqUm6rvVU" frameborder="0"></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/5 overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/VTf5h4_aovk" frameborder="0"></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/5 overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/25UbVuKPpdY" frameborder="0"></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/5 overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/ErUmGyDxjlU" frameborder="0"></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/5 overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/sQgBgaQ3KqA" frameborder="0"></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/5 overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/2x_r7cEyyTo" frameborder="0"></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/5 overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/MO5yiXGsv9Y" frameborder="0"></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/5 overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/09zc86KMC_w" frameborder="0"></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/5 overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/D1OfVYjIDkk" frameborder="0"></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/5 overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/rlu2mrmVy7A" frameborder="0"></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/5 overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/ZW07OjRw4hw" frameborder="0"></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/5 overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/EKuwkEndRhY" frameborder="0"></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/5 overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/UuQtX_nxNxA" frameborder="0"></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/5 overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/UW9uVAvDmPU" frameborder="0"></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/5 overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/tbsTznNlf_g" frameborder="0"></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/5 overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/SnrczZLp6mE" frameborder="0"></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/5 overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/WGOfNn_zr2U" frameborder="0"></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/5 overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/5zwiGcJoFCs" frameborder="0"></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/5 overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/ZFLhfTywuhA" frameborder="0"></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/5 overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/I7CYzIk04Vs" frameborder="0"></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/5 overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/yZSSyoHIi74" frameborder="0"></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/5 overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/GhJ38r_TeFc" frameborder="0"></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/5 overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/h71FwjU2VcM" frameborder="0"></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/5 overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/5zOCJIYcx8o" frameborder="0"></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/5 overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/o8eGvtrUOzQ" frameborder="0"></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/5 overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/nFTgtLnqaNw" frameborder="0"></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/5 overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/9R6EZFy56eA" frameborder="0"></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/5 overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/uukQ49k8-A0" frameborder="0"></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/5 overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/4oRydl6QBE4" frameborder="0"></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/5 overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/UgrQFvUzJXU" frameborder="0"></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/5 overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/u-zLPrn7Okc" frameborder="0"></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/5 overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/4WxYG-iwjDw" frameborder="0"></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/5 overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/eoIODYtleHQ" frameborder="0"></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/5 overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/ScwkSviBEDQ" frameborder="0"></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/5 overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/M74rn8v-5MA" frameborder="0"></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/5 overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/qAdtYI_hxXA" frameborder="0"></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/5 overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/P5jV40AgrVA" frameborder="0"></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/5 overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/L46-KM1cdOA" frameborder="0"></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/5 overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/4EH6mDWYbiU" frameborder="0"></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/5 overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/VlE6-Ufq3NY" frameborder="0"></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/5 overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/nJd1mrjJG_I" frameborder="0"></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/5 overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/OnlRlQYFA3o" frameborder="0"></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/5 overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/HNG9LOHaiXY" frameborder="0"></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/5 overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/h7eMigpZjr8" frameborder="0"></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/5 overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/oE2kPslLKQ4" frameborder="0"></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/5 overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/5nkSf58MO6o" frameborder="0"></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/5 overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/H4jt3dl717U" frameborder="0"></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/5 overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/JJwaZNZY1VM" frameborder="0"></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/5 overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/KHt4blyt6yw" frameborder="0"></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/5 overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/0WwdVt2yA4Y" frameborder="0"></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/5 overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/DrQVd23nJUY" frameborder="0"></iframe></div>
-                </div>
-            </article>
-        </div>
+        <!-- PÁGINA: REDSATEL PERÚ -->
 
-        <!-- PÁGINA: REDSATEL PERÚ (20 REELS) -->
         <div id="page-project-redsatel" class="page-section">
+
             <div class="fixed top-28 left-6 md:left-12 z-40">
+
                 <button onclick="switchPage('home')" class="flex items-center gap-3 text-xs font-bold tracking-[0.2em] uppercase text-gray-400 hover:text-[var(--accent)] transition"><i class="fas fa-arrow-left"></i> Volver</button>
+
             </div>
+
             <article class="pt-40 pb-24 container mx-auto px-6 md:px-12 text-left">
+
                 <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-20 border-b border-white/5 pb-20">
+
                     <div class="md:col-span-4">
-                        <h1 class="text-5xl font-bold text-white heading-font leading-none uppercase">RedSatel<br><span class="text-gray-500">Perú</span></h1>
+
+                        <h1 class="text-5xl font-bold text-white heading-font leading-none uppercase">RedSatel<br><span class="text-[var(--redsatel-blue)]">Perú</span></h1>
+
                         <div class="info-grid uppercase">
+
                             <div class="info-item"><span class="info-label">Cargo</span><span class="info-value">Editor Audiovisual & Animador 2D</span></div>
-                            <div class="info-item"><span class="info-label">Modalidad</span><span class="info-value">In-House / 2021 - 2022</span></div>
+
+                            <div class="info-item"><span class="info-label">Logro</span><span class="info-value">+10k TikTok (2 Semanas)</span></div>
+
                         </div>
+
                     </div>
+
                     <div class="md:col-span-8 border-l border-white/5 pl-0 md:pl-12 pt-4">
-                        <h3 class="text-xl font-bold text-[var(--accent)] mb-6 heading-font uppercase">Social Media Business Reels</h3>
-                        <p class="text-gray-400 text-lg leading-relaxed font-light">Estrategia de Reels animados para el sector tecnológico GPS.</p>
+
+                        <h3 class="text-xl font-bold text-[var(--accent)] mb-6 heading-font uppercase">Estrategia Viral</h3>
+
+                        <p class="text-gray-400 font-light text-lg leading-relaxed">Diseñé y ejecuté la estrategia de TikTok, logrando un crecimiento orgánico explosivo de 0 a +10k seguidores.</p>
+
                     </div>
+
                 </div>
-                <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
-                    <div class="aspect-[9/16] bg-black border border-white/10 rounded-lg overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/nVlokJ4HGIQ" frameborder="0" allowfullscreen></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/10 rounded-lg overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/iU4BaeHqxqY" frameborder="0" allowfullscreen></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/10 rounded-lg overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/jn48U7rG-Nk" frameborder="0" allowfullscreen></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/10 rounded-lg overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/tT3bssiCa1g" frameborder="0" allowfullscreen></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/10 rounded-lg overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/ttLs6q2BkZo" frameborder="0" allowfullscreen></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/10 rounded-lg overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/fgdR9nfORqk" frameborder="0" allowfullscreen></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/10 rounded-lg overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/jEOg13lrIZY" frameborder="0" allowfullscreen></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/10 rounded-lg overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/oFZ_v16MHNY" frameborder="0" allowfullscreen></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/10 rounded-lg overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/w7VFqw3jJnU" frameborder="0" allowfullscreen></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/10 rounded-lg overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/qxqh1jq8G_M" frameborder="0" allowfullscreen></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/10 rounded-lg overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/M08x7iIYsv8" frameborder="0" allowfullscreen></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/10 rounded-lg overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/NkT3YUnzW7s" frameborder="0" allowfullscreen></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/10 rounded-lg overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/Q1YBaF_ivLQ" frameborder="0" allowfullscreen></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/10 rounded-lg overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/W6WeJ7Zrny0" frameborder="0" allowfullscreen></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/10 rounded-lg overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/1dSokOpdnUQ" frameborder="0" allowfullscreen></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/10 rounded-lg overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/xODjX7HzjMU" frameborder="0" allowfullscreen></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/10 rounded-lg overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/pcUqMniUj14" frameborder="0" allowfullscreen></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/10 rounded-lg overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/Ee4l-EddxJA" frameborder="0" allowfullscreen></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/10 rounded-lg overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/raQN4ovQdxI" frameborder="0" allowfullscreen></iframe></div>
-                    <div class="aspect-[9/16] bg-black border border-white/10 rounded-lg overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/fEDIBzNK4w4" frameborder="0" allowfullscreen></iframe></div>
-                </div>
+
             </article>
+
         </div>
 
-        <!-- PÁGINA: APRENDO EN CASA -->
+
+
+        <!-- PÁGINA: APRENDO EN CASA (CON ASSETS CODIFICADOS) -->
+
         <div id="page-aprendo" class="page-section">
+
             <div class="fixed top-28 left-6 md:left-12 z-40">
-                <button onclick="switchPage('home')" class="flex items-center gap-3 text-xs font-bold tracking-[0.2em] uppercase text-gray-400 hover:text-[var(--accent)] transition"><i class="fas fa-arrow-left"></i> Inicio</button>
+
+                <button onclick="switchPage('home')" class="flex items-center gap-3 text-xs font-bold tracking-[0.2em] uppercase text-gray-400 hover:text-[var(--aprendo-orange)] transition"><i class="fas fa-arrow-left"></i> Inicio</button>
+
             </div>
+
             
+
             <article class="pt-40 pb-24 container mx-auto px-6 md:px-12">
+
                 <div id="aprendo-main-view">
+
                     <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-20 border-b border-white/5 pb-20">
+
                         <div class="md:col-span-4">
-                            <h1 class="text-5xl font-bold text-white heading-font leading-none uppercase">Aprendo<br><span class="text-gray-500">en Casa</span></h1>
+
+                            <h1 class="text-5xl font-bold text-white heading-font leading-none uppercase">Aprendo<br><span class="text-[var(--aprendo-orange)]">en Casa</span></h1>
+
                             <div class="info-grid uppercase">
+
                                 <div class="info-item"><span class="info-label">Cargo</span><span class="info-value">Animador & Post-productor</span></div>
+
                                 <div class="info-item"><span class="info-label">Cliente</span><span class="info-value">Speedy Group</span></div>
+
+                                <div class="info-item"><span class="info-label">Modalidad</span><span class="info-value">Gestión de Activos Digitales</span></div>
+
                             </div>
+
                         </div>
-                        <div class="md:col-span-8 border-l border-white/5 pl-0 md:pl-12 pt-4">
-                            <h3 class="text-xl font-bold text-[var(--accent)] mb-6 heading-font uppercase">Aporte y Resultados</h3>
-                            <p class="text-gray-400 font-light text-lg leading-relaxed mb-6">Transformación de guiones pedagógicos en experiencias visuales de impacto nacional.</p>
+
+                        <div class="md:col-span-8 border-l border-white/5 pl-0 md:pl-12">
+
+                            <h3 class="text-xl font-bold text-[var(--aprendo-orange)] mb-6 heading-font uppercase">Aporte y Resultados</h3>
+
+                            <p class="text-gray-400 font-light text-lg leading-relaxed mb-6">Transformación de guiones pedagógicos en experiencias visuales de impacto. Gestión integral de procesos de post-producción y animación bajo estándares de televisión nacional.</p>
+
+                            <ul class="space-y-4 text-gray-500 font-light text-sm list-disc list-outside ml-4 uppercase tracking-widest">
+
+                                <li>Optimización de flujos de trabajo en animación 2D.</li>
+
+                                <li>Diseño sonoro y sincronización rítmica OnBeat.</li>
+
+                                <li>Adaptación narrativa especializada para EBE.</li>
+
+                            </ul>
+
                         </div>
+
                     </div>
+
+
 
                     <h3 class="text-[10px] font-bold text-gray-500 uppercase tracking-[0.4em] mb-10 text-center">Casos de Estudio</h3>
+
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
                         <div onclick="showAprendoProject('hugo')" class="portfolio-item group aspect-video border border-white/5">
+
                             <img src="https://img.youtube.com/vi/KRsg4Xum2mc/hqdefault.jpg" class="w-full h-full object-cover">
-                            <div class="project-overlay"><span class="text-[var(--accent)] text-[9px] font-bold uppercase mb-1">Cuento Animado</span><h3 class="text-xl font-bold text-white heading-font">Hugo y las Medias</h3></div>
+
+                            <div class="project-overlay"><span class="text-[var(--aprendo-orange)] text-[9px] font-bold uppercase mb-1">Cuento Animado</span><h3 class="text-xl font-bold text-white heading-font">Hugo y las Medias</h3></div>
+
                         </div>
+
                         <div onclick="showAprendoProject('globo')" class="portfolio-item group aspect-video border border-white/5">
+
                             <img src="https://img.youtube.com/vi/riWsBC9mQWs/hqdefault.jpg" class="w-full h-full object-cover">
-                            <div class="project-overlay"><span class="text-[var(--accent)] text-[9px] font-bold uppercase mb-1">Videoclip Musical</span><h3 class="text-xl font-bold text-white heading-font">Mi Globo</h3></div>
+
+                            <div class="project-overlay"><span class="text-[var(--aprendo-orange)] text-[9px] font-bold uppercase mb-1">Videoclip Musical</span><h3 class="text-xl font-bold text-white heading-font">Mi Globo</h3></div>
+
                         </div>
+
                         <div onclick="showAprendoProject('tunel')" class="portfolio-item group aspect-video border border-white/5">
+
                             <img src="https://img.youtube.com/vi/Ym_8KLRZN90/hqdefault.jpg" class="w-full h-full object-cover">
-                            <div class="project-overlay"><span class="text-[var(--accent)] text-[9px] font-bold uppercase mb-1">Psicomatriz</span><h3 class="text-xl font-bold text-white heading-font">Gateando por un túnel...</h3></div>
+
+                            <div class="project-overlay"><span class="text-[var(--aprendo-orange)] text-[9px] font-bold uppercase mb-1">Psicomatriz</span><h3 class="text-xl font-bold text-white heading-font">Gateando por un túnel...</h3></div>
+
                         </div>
+
                     </div>
+
                 </div>
 
-                <!-- SUB-SECCIONES: HUGO -->
+
+
+                <!-- SUB-SECCIONES: DETALLE (CON RUTAS GitHub CODIFICADAS) -->
+
                 <div id="sub-hugo" class="sub-project-content space-y-16">
-                    <button onclick="hideAprendoProject()" class="text-xs font-bold text-gray-500 hover:text-[var(--accent)] uppercase tracking-widest flex items-center gap-2 mb-10 transition"><i class="fas fa-arrow-left text-[10px]"></i> Volver</button>
+
+                    <button onclick="hideAprendoProject()" class="text-xs font-bold text-gray-500 hover:text-[var(--aprendo-orange)] uppercase tracking-widest flex items-center gap-2 mb-10 transition"><i class="fas fa-arrow-left text-[10px]"></i> Volver</button>
+
                     <div class="w-full aspect-video bg-[#0a0a0a] border border-gray-900 shadow-2xl overflow-hidden">
+
                         <iframe class="w-full h-full" src="https://www.youtube.com/embed/KRsg4Xum2mc" title="Hugo y las Medias" frameborder="0" allowfullscreen></iframe>
+
                     </div>
-                    <div class="pt-10 border-t border-white/5 text-center">
-                        <h4 class="text-[10px] font-bold text-[var(--accent)] uppercase tracking-[0.3em] mb-8">Character Design (Assets GitHub)</h4>
+
+                    <div class="pt-10 border-t border-white/5">
+
+                        <h4 class="text-[10px] font-bold text-gray-500 uppercase tracking-[0.3em] mb-8 text-center">Character Design (Assets)</h4>
+
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
                             <div class="asset-frame aspect-square border-white/5"><img src="https://raw.githubusercontent.com/FabrizioAtalaya/Portfolio/main/Hugo%20y%20las%20medias/Assets/Assets%20Hugo.jpg" class="w-full h-full object-contain"><span class="asset-label">Hugo</span></div>
+
                             <div class="asset-frame aspect-square border-white/5"><img src="https://raw.githubusercontent.com/FabrizioAtalaya/Portfolio/main/Hugo%20y%20las%20medias/Assets/Assets%20Ladr%C3%B3n.jpg" class="w-full h-full object-contain"><span class="asset-label">Ladrón</span></div>
+
                             <div class="asset-frame aspect-square border-white/5"><img src="https://raw.githubusercontent.com/FabrizioAtalaya/Portfolio/main/Hugo%20y%20las%20medias/Assets/Assets%20Mam%C3%A1.jpg" class="w-full h-full object-contain"><span class="asset-label">Mamá</span></div>
+
                         </div>
+
                     </div>
+
                 </div>
+
+
 
                 <div id="sub-globo" class="sub-project-content space-y-16">
-                    <button onclick="hideAprendoProject()" class="text-xs font-bold text-gray-500 hover:text-[var(--accent)] uppercase tracking-widest flex items-center gap-2 mb-10 transition"><i class="fas fa-arrow-left text-[10px]"></i> Volver</button>
+
+                    <button onclick="hideAprendoProject()" class="text-xs font-bold text-gray-500 hover:text-[var(--aprendo-orange)] uppercase tracking-widest flex items-center gap-2 mb-10 transition"><i class="fas fa-arrow-left text-[10px]"></i> Volver</button>
+
                     <div class="w-full aspect-video bg-[#0a0a0a] border border-gray-900 shadow-2xl overflow-hidden">
-                        <iframe class="w-full h-full" src="https://www.youtube.com/embed/riWsBC9mQWs" title="Mi Globo" frameborder="0" allowfullscreen></iframe>
+
+                        <iframe class="w-full h-full" src="https://www.youtube.com/embed/riWsBC9mQWs" title="Canción Mi Globo" frameborder="0" allowfullscreen></iframe>
+
                     </div>
+
                     <div class="pt-10 border-t border-white/5 text-center">
-                        <h4 class="text-[10px] font-bold text-[var(--accent)] uppercase tracking-[0.3em] mb-8">Visual Highlight</h4>
+
+                        <h4 class="text-[10px] font-bold text-gray-500 uppercase tracking-[0.3em] mb-8">Visual Highlight</h4>
+
                         <div class="asset-frame aspect-video max-w-2xl mx-auto border-white/5"><img src="https://raw.githubusercontent.com/FabrizioAtalaya/Portfolio/main/canci%C3%B3n%20Mi%20globo/Assets/personajes/Assets%20la%20ni%C3%B1a%20y%20el%20globo.jpg" class="w-full h-full object-contain"><span class="asset-label">La Niña y el Globo</span></div>
+
                     </div>
+
                 </div>
+
+
 
                 <div id="sub-tunel" class="sub-project-content space-y-16">
-                    <button onclick="hideAprendoProject()" class="text-xs font-bold text-gray-500 hover:text-[var(--accent)] uppercase tracking-widest flex items-center gap-2 mb-10 transition"><i class="fas fa-arrow-left text-[10px]"></i> Volver</button>
+
+                    <button onclick="hideAprendoProject()" class="text-xs font-bold text-gray-500 hover:text-[var(--aprendo-orange)] uppercase tracking-widest flex items-center gap-2 mb-10 transition"><i class="fas fa-arrow-left text-[10px]"></i> Volver</button>
+
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="aspect-video bg-[#0a0a0a] border border-gray-900 shadow-xl overflow-hidden relative"><iframe class="w-full h-full" src="https://www.youtube.com/embed/Ym_8KLRZN90" title="Cuento" frameborder="0" allowfullscreen></iframe></div>
-                        <div class="aspect-video bg-[#0a0a0a] border border-gray-900 shadow-xl overflow-hidden relative"><iframe class="w-full h-full" src="https://www.youtube.com/embed/WtXUR6YOQzk" title="Canción" frameborder="0" allowfullscreen></iframe></div>
+
+                        <div class="aspect-video bg-[#0a0a0a] border border-gray-900 overflow-hidden relative"><iframe class="w-full h-full" src="https://www.youtube.com/embed/Ym_8KLRZN90" title="Cuento" frameborder="0" allowfullscreen></iframe></div>
+
+                        <div class="aspect-video bg-[#0a0a0a] border border-gray-900 overflow-hidden relative"><iframe class="w-full h-full" src="https://www.youtube.com/embed/WtXUR6YOQzk" title="Canción" frameborder="0" allowfullscreen></iframe></div>
+
                     </div>
+
                     <div class="pt-10 border-t border-white/5 space-y-10">
-                        <h4 class="text-[10px] font-bold text-[var(--accent)] uppercase tracking-[0.3em] text-center">Character & Environment Design</h4>
+
+                        <h4 class="text-[10px] font-bold text-gray-500 uppercase tracking-[0.3em] text-center">Character & Environment Design</h4>
+
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
                             <div class="asset-frame aspect-video border-white/5"><img src="https://raw.githubusercontent.com/FabrizioAtalaya/Portfolio/main/gateando%20por%20un%20t%C3%BAnel%20alcanzo%20lo%20que%20quiero/assets%20personajes/ni%C3%B1a.jpg" class="w-full h-full object-contain"><span class="asset-label">Niña</span></div>
+
                             <div class="asset-frame aspect-video border-white/5"><img src="https://raw.githubusercontent.com/FabrizioAtalaya/Portfolio/main/gateando%20por%20un%20t%C3%BAnel%20alcanzo%20lo%20que%20quiero/assets%20personajes/ni%C3%B1o.jpg" class="w-full h-full object-contain"><span class="asset-label">Niño</span></div>
+
                         </div>
+
                         <div class="asset-frame aspect-video border-white/5"><img src="https://raw.githubusercontent.com/FabrizioAtalaya/Portfolio/main/gateando%20por%20un%20t%C3%BAnel%20alcanzo%20lo%20que%20quiero/assets%20de%20background/Assets%20Background.jpg" class="w-full h-full object-cover"><span class="asset-label">Entorno Psicomatriz</span></div>
+
                     </div>
+
                 </div>
+
             </article>
+
         </div>
+
+
+
+        <!-- PÁGINA: FREELANCE HUB (RESTAURACIÓN TOTAL DE 16 PROYECTOS) -->
+
+        <div id="page-project-freelance" class="page-section">
+
+            <div class="fixed top-28 left-6 md:left-12 z-40">
+
+                <button onclick="switchPage('home')" class="flex items-center gap-3 text-xs font-bold tracking-[0.2em] uppercase text-gray-400 hover:text-[var(--accent)] transition group"><i class="fas fa-arrow-left"></i> Volver al Inicio</button>
+
+            </div>
+
+            <article class="pt-40 pb-24 container mx-auto px-6 md:px-12 text-left">
+
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-20 border-b border-white/5 pb-24 mt-16 md:mt-0">
+
+                    <div class="md:col-span-5 mb-16 md:mb-0">
+
+                        <h1 class="text-5xl md:text-8xl font-bold text-white heading-font leading-[0.9] uppercase">Freelance<br><span class="text-gray-800">Hub</span></h1>
+
+                        <p class="mt-12 text-[10px] text-[var(--accent)] font-bold tracking-[0.3em] uppercase">Sectores: Retail, Social, Legal & Wellness</p>
+
+                    </div>
+
+                    <div class="md:col-span-7 border-l border-white/5 pl-0 md:pl-12 pt-4">
+
+                        <h3 class="text-xl font-bold text-[var(--accent)] mb-6 heading-font uppercase">Soluciones Independientes</h3>
+
+                        <p class="text-gray-400 text-lg leading-relaxed font-light">Compilación de proyectos independientes realizados para diversos sectores.</p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- GRID DE 16 ITEMS (REVISADO) -->
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                    <div class="portfolio-item group aspect-video reveal"><img src="https://images.unsplash.com/photo-1513104890138-7c749659a591" class="w-full h-full object-cover"><div class="project-overlay"><span class="text-[var(--accent)] text-[9px] font-bold uppercase mb-1">Retail</span><h3 class="text-xl font-bold text-white heading-font">Papa John's</h3></div></div>
+
+                    <div class="portfolio-item group md:row-span-2 block relative overflow-hidden aspect-[4/5] reveal"><img src="https://images.unsplash.com/photo-1544161515-4af6b1d4640b" class="w-full h-full object-cover"><div class="project-overlay"><span class="text-[var(--accent)] text-[9px] font-bold uppercase mb-1">Wellness</span><h3 class="text-xl font-bold text-white heading-font">Spa & Wellness</h3></div></div>
+
+                    <div class="portfolio-item group aspect-video reveal"><img src="https://images.unsplash.com/photo-1590947132387-155cc02f3212" class="w-full h-full object-cover"><div class="project-overlay"><span class="text-[var(--accent)] text-[9px] font-bold uppercase mb-1">Food Retail</span><h3 class="text-xl font-bold text-white heading-font">Atalaya Pizzas y cono</h3></div></div>
+
+                    <div class="portfolio-item group aspect-video reveal"><img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622" class="w-full h-full object-cover"><div class="project-overlay"><span class="text-[var(--accent)] text-[9px] font-bold uppercase mb-1">Social Events</span><h3 class="text-xl font-bold text-white heading-font">Bodas & Eventos</h3></div></div>
+
+                    <div class="portfolio-item group aspect-video reveal"><img src="https://images.unsplash.com/photo-1574129624535-649069d2753a" class="w-full h-full object-cover"><div class="project-overlay"><span class="text-[var(--accent)] text-[9px] font-bold uppercase mb-1">Food Retail</span><h3 class="text-xl font-bold text-white heading-font">Pizzas Di Karla</h3></div></div>
+
+                    <div class="portfolio-item group md:col-span-2 block relative overflow-hidden aspect-video reveal"><img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff" class="w-full h-full object-cover"><div class="project-overlay"><span class="text-[var(--accent)] text-[9px] font-bold uppercase mb-1">Calzado / Moda</span><h3 class="text-2xl font-bold text-white heading-font">Azaleia Perú</h3></div></div>
+
+                    <div class="portfolio-item group aspect-video reveal"><img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae" class="w-full h-full object-cover"><div class="project-overlay"><span class="text-[var(--accent)] text-[9px] font-bold uppercase mb-1">Suplementos</span><h3 class="text-xl font-bold text-white heading-font">Bioshorp</h3></div></div>
+
+                    <div class="portfolio-item group aspect-video reveal"><img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3" class="w-full h-full object-cover"><div class="project-overlay"><span class="text-[var(--accent)] text-[9px] font-bold uppercase mb-1">Automotriz</span><h3 class="text-xl font-bold text-white heading-font">Clínica Automotriz</h3></div></div>
+
+                    <div class="portfolio-item group aspect-video reveal"><img src="https://images.unsplash.com/photo-1558981403-c5f91cbba527" class="w-full h-full object-cover"><div class="project-overlay"><span class="text-[var(--accent)] text-[9px] font-bold uppercase mb-1">Motos</span><h3 class="text-xl font-bold text-white heading-font">eBaker</h3></div></div>
+
+                    <div class="portfolio-item group aspect-video reveal"><img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3" class="w-full h-full object-cover"><div class="project-overlay"><span class="text-[var(--accent)] text-[9px] font-bold uppercase mb-1">Malls / Retail</span><h3 class="text-xl font-bold text-white heading-font">Open Plaza</h3></div></div>
+
+                    <div class="portfolio-item group aspect-video reveal"><img src="https://images.unsplash.com/photo-1495020689067-958852a7765e" class="w-full h-full object-cover"><div class="project-overlay"><span class="text-[var(--accent)] text-[9px] font-bold uppercase mb-1">Digital TV</span><h3 class="text-xl font-bold text-white heading-font">RSC TV Online</h3></div></div>
+
+                    <div class="portfolio-item group aspect-video reveal"><img src="https://images.unsplash.com/photo-1544025162-d76694265947" class="w-full h-full object-cover"><div class="project-overlay"><span class="text-[var(--accent)] text-[9px] font-bold uppercase mb-1">Gastronomía</span><h3 class="text-xl font-bold text-white heading-font">La Reina</h3></div></div>
+
+                    <div class="portfolio-item group md:col-span-2 block relative overflow-hidden aspect-video reveal"><img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa" class="w-full h-full object-cover"><div class="project-overlay"><span class="text-[var(--accent)] text-[9px] font-bold uppercase mb-1">Bienes Raíces</span><h3 class="text-2xl font-bold text-white heading-font">Proyecto Inmobiliario</h3></div></div>
+
+                    <div class="portfolio-item group aspect-video reveal"><img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8" class="w-full h-full object-cover"><div class="project-overlay"><span class="text-[var(--accent)] text-[9px] font-bold uppercase mb-1">Moda</span><h3 class="text-xl font-bold text-white heading-font">Miluska Boutique</h3></div></div>
+
+                    <div class="portfolio-item group aspect-video reveal"><img src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7" class="w-full h-full object-cover"><div class="project-overlay"><span class="text-[var(--accent)] text-[9px] font-bold uppercase mb-1">Veterinaria</span><h3 class="text-xl font-bold text-white heading-font">Proyecto Veterinario</h3></div></div>
+
+                    <div class="portfolio-item group aspect-video reveal"><img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f" class="w-full h-full object-cover"><div class="project-overlay"><span class="text-[var(--accent)] text-[9px] font-bold uppercase mb-1">Legal</span><h3 class="text-xl font-bold text-white heading-font">Estudio Jurídico</h3></div></div>
+
+                </div>
+
+            </article>
+
+        </div>
+
+
 
         <!-- PÁGINA: SOBRE MÍ -->
+
         <div id="page-about" class="page-section">
+
             <div class="min-h-screen flex flex-col justify-center pt-32 pb-24 container mx-auto px-6 md:px-12 text-left">
+
                 <div class="flex flex-col md:flex-row items-center gap-16">
+
                     <div class="w-full md:w-1/2 reveal">
+
                         <div class="relative aspect-[3/4] overflow-hidden border border-gray-800">
-                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800" alt="Fabrizio" class="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-700">
+
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800" alt="Fabrizio Atalaya" class="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-700">
+
                         </div>
+
                     </div>
+
                     <div class="w-full md:w-1/2 text-left">
+
                         <p class="text-[var(--accent)] text-xs font-bold tracking-[0.4em] uppercase mb-6 uppercase">Director Creativo</p>
+
                         <h1 class="text-5xl md:text-8xl font-bold text-white heading-font mb-8 uppercase leading-none">Más que<br><span class="text-gray-700">Diseño.</span></h1>
-                        <p class="text-gray-400 text-lg font-light leading-relaxed">Creativo multidisciplinario con más de 4 años de trayectoria profesional.</p>
+
+                        <p class="text-gray-400 text-lg font-light leading-relaxed">Creativo multidisciplinario con más de 4 años de trayectoria profesional liderando identidad visual en entornos industriales.</p>
+
                         <div class="flex gap-12 border-t border-white/5 pt-10 mt-10">
-                            <div><span class="block text-3xl font-bold text-white">4+</span><span class="text-[10px] text-[var(--accent)] uppercase tracking-widest">Años Exp.</span></div>
-                            <div><span class="block text-3xl font-bold text-white">Google</span><span class="text-[10px] text-[var(--accent)] uppercase tracking-widest">Certified</span></div>
+
+                            <div><span class="block text-3xl font-bold text-white">4+</span><span class="text-[10px] text-gray-500 uppercase tracking-widest">Años Exp.</span></div>
+
+                            <div><span class="block text-3xl font-bold text-white">Google</span><span class="text-[10px] text-gray-500 uppercase tracking-widest">Certified</span></div>
+
                         </div>
+
                     </div>
+
                 </div>
+
             </div>
+
         </div>
 
+
+
         <!-- PÁGINA: SERVICIOS -->
+
         <div id="page-services" class="page-section">
+
             <header class="pt-48 pb-32 container mx-auto px-6 md:px-12 text-center uppercase">
+
                 <h1 class="text-5xl md:text-8xl font-bold text-white heading-font mb-12 uppercase leading-none">Servicios<br><span class="text-gray-600">Especializados</span></h1>
+
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-24 text-left">
+
                     <div class="p-10 border border-white/5 hover:border-[var(--accent)] transition-all bg-[#0a0a0a]"><i class="fas fa-film text-2xl text-[var(--accent)] mb-6"></i><h3 class="text-xl font-bold text-white heading-font">Motion Design</h3></div>
+
                     <div class="p-10 border border-white/5 hover:border-[var(--accent)] transition-all bg-[#0a0a0a]"><i class="fas fa-pencil-ruler text-2xl text-[var(--accent)] mb-6"></i><h3 class="text-xl font-bold text-white heading-font">Branding B2B</h3></div>
+
                     <div class="p-10 border border-white/5 hover:border-[var(--accent)] transition-all bg-[#0a0a0a]"><i class="fas fa-robot text-2xl text-[var(--accent)] mb-6"></i><h3 class="text-xl font-bold text-white heading-font">IA Content</h3></div>
+
                 </div>
+
                 <button onclick="openModal()" class="mt-20 bg-[var(--accent)] text-black px-12 py-5 font-bold uppercase tracking-widest hover:bg-white transition-colors duration-300">Solicitar Cotización</button>
+
             </header>
+
         </div>
+
+
 
     </div>
 
+
+
     <!-- FOOTER -->
+
     <footer class="bg-[#080808] border-t border-gray-900 py-24 text-left uppercase">
+
         <div class="container mx-auto px-6 md:px-12 uppercase">
+
             <div class="flex flex-col md:flex-row justify-between items-start gap-16 mb-24">
+
                 <div class="md:w-1/2">
+
                     <p class="text-[var(--accent)] text-xs font-bold uppercase mb-8 tracking-widest">Hablemos ahora</p>
+
                     <a href="mailto:atalayatanantafabrizio@gmail.com" class="text-3xl md:text-5xl font-bold heading-font text-white hover:text-gray-400 transition leading-none">atalayatanantafabrizio<br>@gmail.com</a>
+
                 </div>
+
                 <div class="md:w-1/4 flex flex-col gap-6 text-xs text-gray-500 uppercase tracking-widest font-bold">
+
                     <button onclick="switchPage('home')" class="text-left hover:text-white uppercase">Inicio</button>
+
                     <button onclick="navigateToWork()" class="text-left hover:text-white uppercase">Portafolio</button>
+
                 </div>
+
             </div>
+
             <div class="mt-24 pt-8 border-t border-white/5 flex justify-between items-center text-[10px] text-gray-700 uppercase tracking-widest">
+
                 <span>© 2025 Fabrizio Atalaya</span>
+
                 <span>Lima, Perú</span>
+
             </div>
+
         </div>
+
     </footer>
 
+
+
     <script>
+
         function navigateToWork() {
+
             const home = document.getElementById('page-home');
+
             if (home.classList.contains('active-page')) { 
+
                 document.getElementById('work').scrollIntoView({ behavior: 'smooth' }); 
+
             } else { 
+
                 switchPage('home', 'work'); 
+
             }
+
         }
+
+
 
         function switchPage(pageId, targetId = null) {
+
             const overlay = document.getElementById('transition-overlay');
-            const sections = ['page-home', 'page-services', 'page-project', 'page-about', 'page-project-redsatel', 'page-project-geosatelital', 'page-project-recamier', 'page-aprendo'];
+
+            const sections = ['page-home', 'page-services', 'page-project', 'page-about', 'page-project-redsatel', 'page-project-geosatelital', 'page-aprendo', 'page-project-credco', 'page-project-freelance'];
+
             
+
             overlay.classList.remove('no-transition');
+
             overlay.classList.add('active');
 
+
+
             setTimeout(() => {
+
                 sections.forEach(id => { 
+
                     const el = document.getElementById(id); 
+
                     if (el) el.classList.remove('active-page'); 
+
                 });
+
                 
+
                 const targetPage = document.getElementById('page-' + pageId) || document.getElementById(pageId);
+
                 if (targetPage) targetPage.classList.add('active-page');
+
                 
+
                 if (pageId === 'aprendo') hideAprendoProject();
 
+
+
                 if (targetId) { 
+
                     const targetElement = document.getElementById(targetId); 
+
                     if(targetElement) targetElement.scrollIntoView(); 
+
                 } else { 
+
                     window.scrollTo(0,0); 
+
                 }
+
                 
+
                 setTimeout(() => {
+
                     overlay.classList.add('exit'); 
+
                     
+
                     setTimeout(() => {
+
                         overlay.classList.add('no-transition');
+
                         overlay.classList.remove('active', 'exit');
+
                         void overlay.offsetWidth; 
+
                         overlay.classList.remove('no-transition');
+
                     }, 800);
+
                 }, 200);
+
             }, 800);
+
         }
+
+
 
         function showAprendoProject(subId) {
+
             document.getElementById('aprendo-main-view').style.display = 'none';
+
             const contents = document.querySelectorAll('.sub-project-content');
+
             contents.forEach(c => c.classList.remove('active'));
+
             
+
             const target = document.getElementById('sub-' + subId);
+
             if(target) target.classList.add('active');
+
             window.scrollTo(0,0);
+
         }
+
+
 
         function hideAprendoProject() {
+
             const mainView = document.getElementById('aprendo-main-view');
+
             if(mainView) mainView.style.display = 'block';
+
             const contents = document.querySelectorAll('.sub-project-content');
+
             contents.forEach(c => c.classList.remove('active'));
+
             window.scrollTo(0,0);
+
         }
+
+
 
         function openModal() { document.getElementById('quote-modal').classList.add('active'); }
+
         function closeModal() { document.getElementById('quote-modal').classList.remove('active'); }
 
+
+
         function submitForm(e) {
+
             e.preventDefault();
+
             const phoneNumber = "51972321027"; 
+
             const name = document.getElementById('form-name').value;
+
             window.open(`https://wa.me/${phoneNumber}?text=Hola Fabrizio, soy ${name}, deseo cotizar un proyecto.`, '_blank');
+
             closeModal();
+
         }
 
+
+
         const observer = new IntersectionObserver((entries) => {
+
             entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+
         }, { threshold: 0.1 });
 
+
+
         document.addEventListener('DOMContentLoaded', () => { 
+
             document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
         });
+
+
 
         window.addEventListener('scroll', () => {
+
             const nav = document.querySelector('nav');
+
             if (window.scrollY > 50) nav.classList.add('scrolled');
+
             else nav.classList.remove('scrolled');
+
         });
 
+
+
         const cursor = document.getElementById('cursor');
+
         document.addEventListener('mousemove', (e) => {
+
             cursor.style.left = e.clientX + 'px';
+
             cursor.style.top = e.clientY + 'px';
+
         });
+
     </script>
+
 </body>
+
 </html>
