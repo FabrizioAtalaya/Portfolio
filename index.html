@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+
+ <!DOCTYPE html>
 
 <html lang="es" class="scroll-smooth">
 
@@ -43,8 +44,6 @@
             --speedy-blue: #0088cc;
 
             --credco-blue: #2c3e50; 
-
-            --aprendo-orange: #ffcc00; 
 
         }
 
@@ -92,13 +91,9 @@
 
         }
 
-        
-
         #transition-overlay.active { transform: translateY(0%); pointer-events: all; }
 
         #transition-overlay.exit { transform: translateY(-100%); }
-
-        .no-transition { transition: none !important; }
 
 
 
@@ -116,7 +111,7 @@
 
 
 
-        /* --- ANIMACIÓN BOTÓN SHOWREEL --- */
+        /* --- ANIMACIÓN BOTÓN SHOWREEL (RESTAURADA) --- */
 
         .reel-btn-container { position: relative; display: inline-flex; align-items: center; justify-content: center; }
 
@@ -243,16 +238,6 @@
         .form-input { width: 100%; background-color: #050505; border: 1px solid #333; padding: 12px 16px; color: white; outline: none; }
 
         .form-input:focus { border-color: var(--accent); }
-
-
-
-        /* Sub-Proyectos Internos */
-
-        .sub-project-content { display: none; }
-
-        .sub-project-content.active { display: block; animation: fadeInSub 0.6s ease-out forwards; }
-
-        @keyframes fadeInSub { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
 
 
@@ -400,7 +385,7 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
-                    <!-- 1. GRUPO CREDCO (IZQUIERDA) -->
+                    <!-- 1. GRUPO CREDCO -->
 
                     <div onclick="switchPage('project-credco')" class="portfolio-item group md:row-span-2 block group relative overflow-hidden aspect-[4/5] bg-[#111] reveal">
 
@@ -420,27 +405,7 @@
 
 
 
-                    <!-- 2. GEOSATELITAL -->
-
-                    <div onclick="switchPage('project-geosatelital')" class="portfolio-item group block relative overflow-hidden aspect-video bg-[#111] reveal">
-
-                        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800" class="w-full h-full object-cover">
-
-                        <div class="project-overlay">
-
-                            <span class="text-[var(--accent)] text-[10px] font-bold uppercase mb-1 tracking-widest">Soporte Freelance</span>
-
-                            <h3 class="text-xl font-bold text-white heading-font uppercase">GeoSatelital</h3>
-
-                            <p class="text-gray-400 text-[10px] font-bold uppercase mt-4 border-t border-white/10 pt-4 w-fit">Soporte Externo / 2022 - 2023</p>
-
-                        </div>
-
-                    </div>
-
-
-
-                    <!-- 3. REDSATEL -->
+                    <!-- 2. REDSATEL -->
 
                     <div onclick="switchPage('project-redsatel')" class="portfolio-item group block relative overflow-hidden aspect-video bg-[#111] reveal">
 
@@ -452,27 +417,23 @@
 
                             <h3 class="text-xl font-bold text-white heading-font uppercase">RedSatel Perú</h3>
 
-                            <p class="text-gray-400 text-[10px] font-bold uppercase mt-4 border-t border-white/10 pt-4 w-fit">In-House / 2021 - 2022</p>
-
                         </div>
 
                     </div>
 
 
 
-                    <!-- 4. SPEEDY GROUP (Minedu/Aprendo en Casa) -->
+                    <!-- 3. SPEEDY GROUP -->
 
-                    <div onclick="switchPage('aprendo')" class="portfolio-item group block relative overflow-hidden aspect-video bg-[#111] reveal">
+                    <div onclick="switchPage('project-speedy')" class="portfolio-item group block relative overflow-hidden aspect-video bg-[#111] reveal">
 
-                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=800" class="w-full h-full object-cover">
+                        <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=800" class="w-full h-full object-cover">
 
                         <div class="project-overlay">
 
-                            <span class="text-[var(--aprendo-orange)] text-[10px] font-bold uppercase mb-1 tracking-widest">Minedu / TV Perú</span>
+                            <span class="text-[var(--accent)] text-[10px] font-bold uppercase mb-1 tracking-widest">TV Nacional</span>
 
                             <h3 class="text-xl font-bold text-white heading-font uppercase">Speedy Group</h3>
-
-                            <p class="text-gray-400 text-[10px] font-bold uppercase mt-4 border-t border-white/10 pt-4 w-fit">In-House / 2020 - 2021</p>
 
                         </div>
 
@@ -480,19 +441,35 @@
 
 
 
-                    <!-- 5. FREELANCE HUB (DERECHA) -->
+                    <!-- 4. GEOSATELITAL -->
 
-                    <div onclick="switchPage('project-freelance')" class="portfolio-item group md:row-span-2 block group relative overflow-hidden aspect-[4/5] bg-[#111] reveal">
+                    <div onclick="switchPage('project-geosatelital')" class="portfolio-item group block relative overflow-hidden aspect-video bg-[#111] reveal">
+
+                        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800" class="w-full h-full object-cover">
+
+                        <div class="project-overlay">
+
+                            <span class="text-[var(--accent)] text-[10px] font-bold uppercase mb-1 tracking-widest">Soporte Freelance</span>
+
+                            <h3 class="text-xl font-bold text-white heading-font uppercase">GeoSatelital</h3>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- 5. FREELANCE HUB (ENTRADA) -->
+
+                    <div onclick="switchPage('project-freelance')" class="portfolio-item group block relative overflow-hidden aspect-video bg-[#111] reveal">
 
                         <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=1200" class="w-full h-full object-cover">
 
                         <div class="project-overlay">
 
-                            <span class="text-[var(--accent)] text-[10px] font-bold uppercase mb-2 tracking-[0.3em]">Corporativo & Retail</span>
+                            <span class="text-[var(--accent)] text-[10px] font-bold uppercase mb-1 tracking-widest">Corporativo & Retail</span>
 
-                            <h3 class="text-2xl md:text-3xl font-bold text-white heading-font uppercase">Freelance Hub</h3>
-
-                            <p class="text-gray-400 text-[10px] font-bold uppercase mt-4 border-t border-white/10 pt-4 w-fit">Proyectos Independientes</p>
+                            <h3 class="text-2xl font-bold text-white heading-font uppercase">Freelance Hub</h3>
 
                         </div>
 
@@ -506,7 +483,7 @@
 
 
 
-        <!-- PÁGINA: DETALLE SHOWREEL -->
+        <!-- PÁGINA: DETALLE SHOWREEL (INFO VERÍDICA) -->
 
         <div id="page-project" class="page-section">
 
@@ -546,11 +523,11 @@
 
                         <h3 class="text-xl font-bold text-white mb-4 heading-font uppercase">Visión Estratégica</h3>
 
-                        <p class="text-gray-400 leading-relaxed mb-10 font-light text-lg">Profesionalizar la comunicación visual mediante la integración de técnica audiovisual avanzada y procesos optimizados con Inteligencia Artificial.</p>
+                        <p class="text-gray-400 leading-relaxed mb-10 font-light text-lg">Profesionalizar la comunicación visual mediante la integración de técnica audiovisual avanzada y procesos optimizados con Inteligencia Artificial. Mi enfoque busca que cada pieza gráfica y de video no solo mantenga un estándar técnico de alta calidad, sino que esté estructurada estratégicamente para maximizar el alcance y la relevancia de la marca en cualquier plataforma digital.</p>
 
                         <h3 class="text-xl font-bold text-white mb-4 heading-font uppercase">Propuesta de Valor</h3>
 
-                        <p class="text-gray-400 leading-relaxed font-light text-lg">Desarrollo y ejecuto proyectos audiovisuales con un enfoque en resultados tangibles, desde el crecimiento de audiencias orgánicas hasta la reestructuración de identidades corporativas.</p>
+                        <p class="text-gray-400 leading-relaxed font-light text-lg">Desarrollo y ejecuto proyectos audiovisuales y de diseño gráfico con un enfoque en resultados tangibles, desde el crecimiento de audiencias orgánicas hasta la reestructuración de identidades corporativas. Mi trabajo combina el dominio técnico de herramientas de edición con estrategias de contenido que incrementan la presencia digital y la autoridad de marca en diversos sectores.</p>
 
                     </div>
 
@@ -562,7 +539,7 @@
 
 
 
-        <!-- PÁGINA: DETALLE GRUPO CREDCO -->
+        <!-- PÁGINA: DETALLE GRUPO CREDCO (INFO CV VERÍDICA) -->
 
         <div id="page-project-credco" class="page-section">
 
@@ -590,15 +567,19 @@
 
                     </div>
 
-                    <div class="md:col-span-8 border-l border-white/5 pl-0 md:pl-12 pt-4">
+                    <div class="md:col-span-8">
 
                         <h3 class="text-xl font-bold text-[var(--accent)] mb-6 heading-font uppercase">Aporte y Resultados</h3>
 
                         <ul class="space-y-4 text-gray-400 font-light text-lg leading-relaxed list-disc list-outside ml-4">
 
-                            <li>Reestructuración de Identidad: Estandarización completa de la identidad visual corporativa.</li>
+                            <li>**Reestructuración de Identidad:** Estandarización completa de la identidad visual corporativa y logotipos.</li>
 
-                            <li>Estrategia LinkedIn: Liderazgo de contenidos logrando posicionar a la marca en el Top 10 sectorial.</li>
+                            <li>**Estrategia LinkedIn:** Liderazgo de contenidos logrando posicionar a la marca en el **Top 10 sectorial**.</li>
+
+                            <li>**Producción Editorial:** Diseño de libros, agendas y señalética técnica institucional.</li>
+
+                            <li>**Soporte de Ingeniería:** Creación de simulaciones visuales para licitaciones críticas.</li>
 
                         </ul>
 
@@ -620,7 +601,7 @@
 
 
 
-        <!-- PÁGINA: REDSATEL PERÚ -->
+        <!-- PÁGINA: REDSATEL PERÚ (INFO VERÍDICA) -->
 
         <div id="page-project-redsatel" class="page-section">
 
@@ -648,13 +629,25 @@
 
                     </div>
 
-                    <div class="md:col-span-8 border-l border-white/5 pl-0 md:pl-12 pt-4">
+                    <div class="md:col-span-8">
 
                         <h3 class="text-xl font-bold text-[var(--accent)] mb-6 heading-font uppercase">Estrategia Viral</h3>
 
-                        <p class="text-gray-400 font-light text-lg leading-relaxed">Diseñé y ejecuté la estrategia de TikTok, logrando un crecimiento orgánico explosivo de 0 a +10k seguidores.</p>
+                        <p class="text-gray-400 font-light text-lg leading-relaxed">Diseñé y ejecuté la estrategia de **TikTok**, logrando un crecimiento orgánico explosivo de **0 a +10k seguidores en solo 2 semanas**. Produje spots integrando animación 2D y storytelling comercial.</p>
 
                     </div>
+
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+
+                    <div class="asset-frame aspect-[9/16]"><i class="fab fa-tiktok asset-icon"></i><span class="asset-label uppercase">Viral Reel 01</span></div>
+
+                    <div class="asset-frame aspect-[9/16]"><i class="fab fa-tiktok asset-icon"></i><span class="asset-label uppercase">Viral Reel 02</span></div>
+
+                    <div class="asset-frame aspect-[9/16]"><i class="fab fa-tiktok asset-icon"></i><span class="asset-label uppercase">Viral Reel 03</span></div>
+
+                    <div class="asset-frame aspect-[9/16]"><i class="fab fa-tiktok asset-icon"></i><span class="asset-label uppercase">Viral Reel 04</span></div>
 
                 </div>
 
@@ -664,177 +657,75 @@
 
 
 
-        <!-- PÁGINA: APRENDO EN CASA (CON ASSETS CODIFICADOS) -->
+        <!-- PÁGINA: SPEEDY GROUP (INFO VERÍDICA) -->
 
-        <div id="page-aprendo" class="page-section">
+        <div id="page-project-speedy" class="page-section">
 
             <div class="fixed top-28 left-6 md:left-12 z-40">
 
-                <button onclick="switchPage('home')" class="flex items-center gap-3 text-xs font-bold tracking-[0.2em] uppercase text-gray-400 hover:text-[var(--aprendo-orange)] transition"><i class="fas fa-arrow-left"></i> Inicio</button>
+                <button onclick="switchPage('home')" class="flex items-center gap-3 text-xs font-bold tracking-[0.2em] uppercase text-gray-400 hover:text-[var(--accent)] transition"><i class="fas fa-arrow-left"></i> Volver</button>
 
             </div>
 
-            
+            <article class="pt-40 pb-24 container mx-auto px-6 md:px-12 text-left">
 
-            <article class="pt-40 pb-24 container mx-auto px-6 md:px-12">
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-20 border-b border-white/5 pb-20">
 
-                <div id="aprendo-main-view">
+                    <div class="md:col-span-4">
 
-                    <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-20 border-b border-white/5 pb-20">
+                        <h1 class="text-5xl font-bold text-white heading-font leading-none uppercase">Speedy<br><span class="text-[var(--speedy-blue)]">Group</span></h1>
 
-                        <div class="md:col-span-4">
+                        <div class="info-grid uppercase">
 
-                            <h1 class="text-5xl font-bold text-white heading-font leading-none uppercase">Aprendo<br><span class="text-[var(--aprendo-orange)]">en Casa</span></h1>
+                            <div class="info-item"><span class="info-label">Foco</span><span class="info-value">TV Perú (Aprendo en Casa)</span></div>
 
-                            <div class="info-grid uppercase">
-
-                                <div class="info-item"><span class="info-label">Cargo</span><span class="info-value">Animador & Post-productor</span></div>
-
-                                <div class="info-item"><span class="info-label">Cliente</span><span class="info-value">Speedy Group</span></div>
-
-                                <div class="info-item"><span class="info-label">Modalidad</span><span class="info-value">Gestión de Activos Digitales</span></div>
-
-                            </div>
-
-                        </div>
-
-                        <div class="md:col-span-8 border-l border-white/5 pl-0 md:pl-12">
-
-                            <h3 class="text-xl font-bold text-[var(--aprendo-orange)] mb-6 heading-font uppercase">Aporte y Resultados</h3>
-
-                            <p class="text-gray-400 font-light text-lg leading-relaxed mb-6">Transformación de guiones pedagógicos en experiencias visuales de impacto. Gestión integral de procesos de post-producción y animación bajo estándares de televisión nacional.</p>
-
-                            <ul class="space-y-4 text-gray-500 font-light text-sm list-disc list-outside ml-4 uppercase tracking-widest">
-
-                                <li>Optimización de flujos de trabajo en animación 2D.</li>
-
-                                <li>Diseño sonoro y sincronización rítmica OnBeat.</li>
-
-                                <li>Adaptación narrativa especializada para EBE.</li>
-
-                            </ul>
+                            <div class="info-item"><span class="info-label">Rol</span><span class="info-value">Editor Audiovisual & Subtitulador</span></div>
 
                         </div>
 
                     </div>
 
+                    <div class="md:col-span-8">
 
+                        <h3 class="text-xl font-bold text-[var(--accent)] mb-6 heading-font uppercase">Excelencia en TV Nacional</h3>
 
-                    <h3 class="text-[10px] font-bold text-gray-500 uppercase tracking-[0.4em] mb-10 text-center">Casos de Estudio</h3>
-
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-
-                        <div onclick="showAprendoProject('hugo')" class="portfolio-item group aspect-video border border-white/5">
-
-                            <img src="https://img.youtube.com/vi/KRsg4Xum2mc/hqdefault.jpg" class="w-full h-full object-cover">
-
-                            <div class="project-overlay"><span class="text-[var(--aprendo-orange)] text-[9px] font-bold uppercase mb-1">Cuento Animado</span><h3 class="text-xl font-bold text-white heading-font">Hugo y las Medias</h3></div>
-
-                        </div>
-
-                        <div onclick="showAprendoProject('globo')" class="portfolio-item group aspect-video border border-white/5">
-
-                            <img src="https://img.youtube.com/vi/riWsBC9mQWs/hqdefault.jpg" class="w-full h-full object-cover">
-
-                            <div class="project-overlay"><span class="text-[var(--aprendo-orange)] text-[9px] font-bold uppercase mb-1">Videoclip Musical</span><h3 class="text-xl font-bold text-white heading-font">Mi Globo</h3></div>
-
-                        </div>
-
-                        <div onclick="showAprendoProject('tunel')" class="portfolio-item group aspect-video border border-white/5">
-
-                            <img src="https://img.youtube.com/vi/Ym_8KLRZN90/hqdefault.jpg" class="w-full h-full object-cover">
-
-                            <div class="project-overlay"><span class="text-[var(--aprendo-orange)] text-[9px] font-bold uppercase mb-1">Psicomatriz</span><h3 class="text-xl font-bold text-white heading-font">Gateando por un túnel...</h3></div>
-
-                        </div>
+                        <p class="text-gray-400 font-light text-lg leading-relaxed">Editor del programa educativo nacional "Aprendo en Casa", asegurando estándares de alta calidad para TV Perú. Gestión de postproducción para piezas pedagógicas y animación 2D infantil.</p>
 
                     </div>
 
                 </div>
 
+                <div class="asset-frame aspect-video w-full"><i class="fas fa-tv asset-icon"></i><span class="asset-label uppercase">Aprendo en Casa Clip</span></div>
 
+            </article>
 
-                <!-- SUB-SECCIONES: DETALLE (CON RUTAS GitHub CODIFICADAS) -->
-
-                <div id="sub-hugo" class="sub-project-content space-y-16">
-
-                    <button onclick="hideAprendoProject()" class="text-xs font-bold text-gray-500 hover:text-[var(--aprendo-orange)] uppercase tracking-widest flex items-center gap-2 mb-10 transition"><i class="fas fa-arrow-left text-[10px]"></i> Volver</button>
-
-                    <div class="w-full aspect-video bg-[#0a0a0a] border border-gray-900 shadow-2xl overflow-hidden">
-
-                        <iframe class="w-full h-full" src="https://www.youtube.com/embed/KRsg4Xum2mc" title="Hugo y las Medias" frameborder="0" allowfullscreen></iframe>
-
-                    </div>
-
-                    <div class="pt-10 border-t border-white/5">
-
-                        <h4 class="text-[10px] font-bold text-gray-500 uppercase tracking-[0.3em] mb-8 text-center">Character Design (Assets)</h4>
-
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-
-                            <div class="asset-frame aspect-square border-white/5"><img src="https://raw.githubusercontent.com/FabrizioAtalaya/Portfolio/main/Hugo%20y%20las%20medias/Assets/Assets%20Hugo.jpg" class="w-full h-full object-contain"><span class="asset-label">Hugo</span></div>
-
-                            <div class="asset-frame aspect-square border-white/5"><img src="https://raw.githubusercontent.com/FabrizioAtalaya/Portfolio/main/Hugo%20y%20las%20medias/Assets/Assets%20Ladr%C3%B3n.jpg" class="w-full h-full object-contain"><span class="asset-label">Ladrón</span></div>
-
-                            <div class="asset-frame aspect-square border-white/5"><img src="https://raw.githubusercontent.com/FabrizioAtalaya/Portfolio/main/Hugo%20y%20las%20medias/Assets/Assets%20Mam%C3%A1.jpg" class="w-full h-full object-contain"><span class="asset-label">Mamá</span></div>
-
-                        </div>
-
-                    </div>
-
-                </div>
+        </div>
 
 
 
-                <div id="sub-globo" class="sub-project-content space-y-16">
+        <!-- PÁGINA: GEOSATELITAL (INFO VERÍDICA) -->
 
-                    <button onclick="hideAprendoProject()" class="text-xs font-bold text-gray-500 hover:text-[var(--aprendo-orange)] uppercase tracking-widest flex items-center gap-2 mb-10 transition"><i class="fas fa-arrow-left text-[10px]"></i> Volver</button>
+        <div id="page-project-geosatelital" class="page-section">
 
-                    <div class="w-full aspect-video bg-[#0a0a0a] border border-gray-900 shadow-2xl overflow-hidden">
+            <div class="fixed top-28 left-6 md:left-12 z-40">
 
-                        <iframe class="w-full h-full" src="https://www.youtube.com/embed/riWsBC9mQWs" title="Canción Mi Globo" frameborder="0" allowfullscreen></iframe>
+                <button onclick="switchPage('home')" class="flex items-center gap-3 text-xs font-bold tracking-[0.2em] uppercase text-gray-400 hover:text-[var(--accent)] transition"><i class="fas fa-arrow-left"></i> Volver</button>
 
-                    </div>
+            </div>
 
-                    <div class="pt-10 border-t border-white/5 text-center">
+            <article class="pt-40 pb-24 container mx-auto px-6 md:px-12 text-left">
 
-                        <h4 class="text-[10px] font-bold text-gray-500 uppercase tracking-[0.3em] mb-8">Visual Highlight</h4>
+                <h1 class="text-5xl font-bold text-white heading-font mb-12 uppercase text-left">Geo<span class="text-[var(--geosatelital-blue)]">Satelital</span></h1>
 
-                        <div class="asset-frame aspect-video max-w-2xl mx-auto border-white/5"><img src="https://raw.githubusercontent.com/FabrizioAtalaya/Portfolio/main/canci%C3%B3n%20Mi%20globo/Assets/personajes/Assets%20la%20ni%C3%B1a%20y%20el%20globo.jpg" class="w-full h-full object-contain"><span class="asset-label">La Niña y el Globo</span></div>
+                <p class="text-gray-400 text-lg mb-12 max-w-3xl leading-relaxed">Aliado estratégico externo para soporte visual continuo en campañas digitales y redes sociales enfocado en tecnología vehicular y datos satelitales.</p>
 
-                    </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-                </div>
+                    <div class="asset-frame aspect-[3/4]"><i class="fas fa-palette asset-icon"></i><span class="asset-label uppercase">Ad Content 01</span></div>
 
+                    <div class="asset-frame aspect-[3/4]"><i class="fas fa-palette asset-icon"></i><span class="asset-label uppercase">Ad Content 02</span></div>
 
-
-                <div id="sub-tunel" class="sub-project-content space-y-16">
-
-                    <button onclick="hideAprendoProject()" class="text-xs font-bold text-gray-500 hover:text-[var(--aprendo-orange)] uppercase tracking-widest flex items-center gap-2 mb-10 transition"><i class="fas fa-arrow-left text-[10px]"></i> Volver</button>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-                        <div class="aspect-video bg-[#0a0a0a] border border-gray-900 overflow-hidden relative"><iframe class="w-full h-full" src="https://www.youtube.com/embed/Ym_8KLRZN90" title="Cuento" frameborder="0" allowfullscreen></iframe></div>
-
-                        <div class="aspect-video bg-[#0a0a0a] border border-gray-900 overflow-hidden relative"><iframe class="w-full h-full" src="https://www.youtube.com/embed/WtXUR6YOQzk" title="Canción" frameborder="0" allowfullscreen></iframe></div>
-
-                    </div>
-
-                    <div class="pt-10 border-t border-white/5 space-y-10">
-
-                        <h4 class="text-[10px] font-bold text-gray-500 uppercase tracking-[0.3em] text-center">Character & Environment Design</h4>
-
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-                            <div class="asset-frame aspect-video border-white/5"><img src="https://raw.githubusercontent.com/FabrizioAtalaya/Portfolio/main/gateando%20por%20un%20t%C3%BAnel%20alcanzo%20lo%20que%20quiero/assets%20personajes/ni%C3%B1a.jpg" class="w-full h-full object-contain"><span class="asset-label">Niña</span></div>
-
-                            <div class="asset-frame aspect-video border-white/5"><img src="https://raw.githubusercontent.com/FabrizioAtalaya/Portfolio/main/gateando%20por%20un%20t%C3%BAnel%20alcanzo%20lo%20que%20quiero/assets%20personajes/ni%C3%B1o.jpg" class="w-full h-full object-contain"><span class="asset-label">Niño</span></div>
-
-                        </div>
-
-                        <div class="asset-frame aspect-video border-white/5"><img src="https://raw.githubusercontent.com/FabrizioAtalaya/Portfolio/main/gateando%20por%20un%20t%C3%BAnel%20alcanzo%20lo%20que%20quiero/assets%20de%20background/Assets%20Background.jpg" class="w-full h-full object-cover"><span class="asset-label">Entorno Psicomatriz</span></div>
-
-                    </div>
+                    <div class="asset-frame aspect-[3/4]"><i class="fas fa-palette asset-icon"></i><span class="asset-label uppercase">Ad Content 03</span></div>
 
                 </div>
 
@@ -844,7 +735,7 @@
 
 
 
-        <!-- PÁGINA: FREELANCE HUB (RESTAURACIÓN TOTAL DE 16 PROYECTOS) -->
+        <!-- PÁGINA: FREELANCE HUB (LISTA COMPLETA DE 16 PROYECTOS) -->
 
         <div id="page-project-freelance" class="page-section">
 
@@ -856,21 +747,21 @@
 
             <article class="pt-40 pb-24 container mx-auto px-6 md:px-12 text-left">
 
-                <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-20 border-b border-white/5 pb-24 mt-16 md:mt-0">
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-20 border-b border-white/5 pb-20">
 
-                    <div class="md:col-span-5 mb-16 md:mb-0">
+                    <div class="md:col-span-5">
 
-                        <h1 class="text-5xl md:text-8xl font-bold text-white heading-font leading-[0.9] uppercase">Freelance<br><span class="text-gray-800">Hub</span></h1>
+                        <h1 class="text-5xl md:text-8xl font-bold text-white heading-font leading-none uppercase">Freelance<br><span class="text-gray-800">Hub</span></h1>
 
-                        <p class="mt-12 text-[10px] text-[var(--accent)] font-bold tracking-[0.3em] uppercase">Sectores: Retail, Social, Legal & Wellness</p>
+                        <p class="mt-8 text-[10px] text-[var(--accent)] font-bold tracking-[0.3em] uppercase">Sectores: Retail, Social, Legal & Wellness</p>
 
                     </div>
 
-                    <div class="md:col-span-7 border-l border-white/5 pl-0 md:pl-12 pt-4">
+                    <div class="md:col-span-7">
 
                         <h3 class="text-xl font-bold text-[var(--accent)] mb-6 heading-font uppercase">Soluciones Independientes</h3>
 
-                        <p class="text-gray-400 text-lg leading-relaxed font-light">Compilación de proyectos independientes realizados para diversos sectores.</p>
+                        <p class="text-gray-400 text-lg leading-relaxed font-light">Compilación de proyectos independientes realizados para diversos sectores. Cada cuadro representa un caso de éxito visual adaptado a necesidades específicas.</p>
 
                     </div>
 
@@ -878,7 +769,7 @@
 
 
 
-                <!-- GRID DE 16 ITEMS (REVISADO) -->
+                <!-- GRID DE 16 TRABAJOS (INFORMACIÓN VERÍDICA) -->
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
@@ -1060,37 +951,19 @@
 
             const overlay = document.getElementById('transition-overlay');
 
-            const sections = ['page-home', 'page-services', 'page-project', 'page-about', 'page-project-redsatel', 'page-project-geosatelital', 'page-aprendo', 'page-project-credco', 'page-project-freelance'];
-
-            
-
-            overlay.classList.remove('no-transition');
+            const sections = ['page-home', 'page-services', 'page-project', 'page-about', 'page-project-redsatel', 'page-project-geosatelital', 'page-project-speedy', 'page-project-credco', 'page-project-freelance'];
 
             overlay.classList.add('active');
 
-
-
             setTimeout(() => {
 
-                sections.forEach(id => { 
+                sections.forEach(id => { const el = document.getElementById(id); if (el) el.classList.remove('active-page'); });
 
-                    const el = document.getElementById(id); 
-
-                    if (el) el.classList.remove('active-page'); 
-
-                });
-
-                
-
-                const targetPage = document.getElementById('page-' + pageId) || document.getElementById(pageId);
+                const targetPage = document.getElementById('page-' + pageId);
 
                 if (targetPage) targetPage.classList.add('active-page');
 
                 
-
-                if (pageId === 'aprendo') hideAprendoProject();
-
-
 
                 if (targetId) { 
 
@@ -1098,71 +971,13 @@
 
                     if(targetElement) targetElement.scrollIntoView(); 
 
-                } else { 
-
-                    window.scrollTo(0,0); 
-
-                }
+                } else { window.scrollTo(0,0); }
 
                 
 
-                setTimeout(() => {
+                setTimeout(() => { overlay.classList.add('exit'); setTimeout(() => { overlay.classList.remove('active', 'exit'); }, 800); }, 200);
 
-                    overlay.classList.add('exit'); 
-
-                    
-
-                    setTimeout(() => {
-
-                        overlay.classList.add('no-transition');
-
-                        overlay.classList.remove('active', 'exit');
-
-                        void overlay.offsetWidth; 
-
-                        overlay.classList.remove('no-transition');
-
-                    }, 800);
-
-                }, 200);
-
-            }, 800);
-
-        }
-
-
-
-        function showAprendoProject(subId) {
-
-            document.getElementById('aprendo-main-view').style.display = 'none';
-
-            const contents = document.querySelectorAll('.sub-project-content');
-
-            contents.forEach(c => c.classList.remove('active'));
-
-            
-
-            const target = document.getElementById('sub-' + subId);
-
-            if(target) target.classList.add('active');
-
-            window.scrollTo(0,0);
-
-        }
-
-
-
-        function hideAprendoProject() {
-
-            const mainView = document.getElementById('aprendo-main-view');
-
-            if(mainView) mainView.style.display = 'block';
-
-            const contents = document.querySelectorAll('.sub-project-content');
-
-            contents.forEach(c => c.classList.remove('active'));
-
-            window.scrollTo(0,0);
+            }, 800); 
 
         }
 
