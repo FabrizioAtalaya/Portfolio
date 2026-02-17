@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es" class="scroll-smooth">
 <head>
@@ -123,6 +122,13 @@
         .sub-project-content.active { display: block; animation: fadeInSub 0.6s ease-out forwards; }
         @keyframes fadeInSub { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
+        /* Social Icons Footer */
+        .social-btn {
+            width: 50px; height: 50px; border: 1px solid rgba(255,255,255,0.1); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; color: #666;
+        }
+        .social-btn:hover { border-color: var(--accent); color: white; transform: translateY(-3px); }
+
         @media (max-width: 768px) { .transition-brand { font-size: 3rem; } }
     </style>
 </head>
@@ -160,22 +166,23 @@
         <div class="hidden md:flex gap-10 text-[11px] font-bold tracking-[0.2em] uppercase z-50 text-gray-400">
             <button onclick="switchPage('home')" class="hover:text-white transition">Inicio</button>
             <button onclick="navigateToWork()" class="hover:text-white transition">Proyectos</button>
-            <button onclick="switchPage('services')" class="hover:text-white transition">Servicios</button>
             <button onclick="switchPage('about')" class="hover:text-white transition">Sobre Mí</button>
         </div>
     </nav>
 
     <div id="main-content">
 
-        <!-- PÁGINA: INICIO (GRID DE IMPACTO TOTAL) -->
+        <!-- PÁGINA: INICIO -->
         <div id="page-home" class="page-section active-page text-center">
             <header class="relative w-full h-screen flex flex-col justify-center items-center text-center px-4 overflow-hidden">
                 <div class="absolute inset-0 z-0">
-                     <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2000&auto=format&fit=crop" class="w-full h-full object-cover opacity-20" alt="Background">
+                     <!-- CAMBIO: Imagen de estación de postproducción / edición -->
+                     <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=2000&auto=format&fit=crop" class="w-full h-full object-cover opacity-30" alt="Background Post-Production Station">
                      <div class="absolute inset-0 bg-gradient-to-b from-[#050505] via-transparent to-[#050505]"></div>
                 </div>
                 <div class="relative z-10">
-                    <h1 class="text-6xl md:text-9xl font-bold leading-none tracking-tighter text-white mb-10 uppercase">Crafting<br>Motion</h1>
+                    <!-- TEXTO: Audiovisual Designer -->
+                    <h1 class="text-6xl md:text-9xl font-bold leading-none tracking-tighter text-white mb-10 uppercase">Audiovisual<br>Designer</h1>
                     
                     <a onclick="switchPage('project')" class="reel-btn-container group cursor-pointer">
                         <div class="reel-btn-pulse"></div>
@@ -247,7 +254,8 @@
 
                     <!-- 6. RECAMIER (FREELANCE) -->
                     <div onclick="switchPage('project-recamier')" class="portfolio-item group block relative overflow-hidden aspect-video bg-[#111] reveal">
-                        <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=800" class="w-full h-full object-cover">
+                        <!-- FIX: Imagen de shampoo/cabello profesional -->
+                        <img src="https://images.unsplash.com/photo-1552046122-03184de85e08?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover">
                         <div class="project-overlay">
                             <span class="text-[var(--accent)] text-[10px] font-bold uppercase mb-1 tracking-widest">Beauty & Professional</span>
                             <h3 class="text-xl font-bold text-white heading-font uppercase">Recamier</h3>
@@ -498,7 +506,7 @@
 
                 <div class="mb-24">
                     <h4 class="text-[10px] font-bold text-[var(--accent)] uppercase tracking-[0.4em] mb-10 border-b border-white/5 pb-4">Priority Reels</h4>
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
                         <div class="aspect-[9/16] bg-black border border-white/10 rounded-lg overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/YeAi6m12chc" frameborder="0" allowfullscreen title="Video #13"></iframe></div>
                         <div class="aspect-[9/16] bg-black border border-white/10 rounded-lg overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/zm-sNc46b6M" frameborder="0" allowfullscreen title="Video #17"></iframe></div>
                         <div class="aspect-[9/16] bg-black border border-white/10 rounded-lg overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/H4jt3dl717U" frameborder="0" allowfullscreen title="Video #46"></iframe></div>
@@ -723,19 +731,6 @@
             </div>
         </div>
 
-        <!-- PÁGINA: SERVICIOS -->
-        <div id="page-services" class="page-section">
-            <header class="pt-48 pb-32 container mx-auto px-6 md:px-12 text-center uppercase">
-                <h1 class="text-5xl md:text-8xl font-bold text-white heading-font mb-12 uppercase leading-none">Servicios<br><span class="text-gray-600">Especializados</span></h1>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-24 text-left">
-                    <div class="p-10 border border-white/5 hover:border-[var(--accent)] transition-all bg-[#0a0a0a]"><i class="fas fa-film text-2xl text-[var(--accent)] mb-6"></i><h3 class="text-xl font-bold text-white heading-font">Motion Design</h3></div>
-                    <div class="p-10 border border-white/5 hover:border-[var(--accent)] transition-all bg-[#0a0a0a]"><i class="fas fa-pencil-ruler text-2xl text-[var(--accent)] mb-6"></i><h3 class="text-xl font-bold text-white heading-font">Branding B2B</h3></div>
-                    <div class="p-10 border border-white/5 hover:border-[var(--accent)] transition-all bg-[#0a0a0a]"><i class="fas fa-robot text-2xl text-[var(--accent)] mb-6"></i><h3 class="text-xl font-bold text-white heading-font">IA Content</h3></div>
-                </div>
-                <button onclick="openModal()" class="mt-20 bg-[var(--accent)] text-black px-12 py-5 font-bold uppercase tracking-widest hover:bg-white transition-colors duration-300">Solicitar Cotización</button>
-            </header>
-        </div>
-
     </div>
 
     <!-- FOOTER -->
@@ -743,12 +738,15 @@
         <div class="container mx-auto px-6 md:px-12 uppercase">
             <div class="flex flex-col md:flex-row justify-between items-start gap-16 mb-24">
                 <div class="md:w-1/2">
-                    <p class="text-[var(--accent)] text-xs font-bold uppercase mb-8 tracking-widest">Hablemos ahora</p>
-                    <a href="mailto:atalayatanantafabrizio@gmail.com" class="text-3xl md:text-5xl font-bold heading-font text-white hover:text-gray-400 transition leading-none">atalayatanantafabrizio<br>@gmail.com</a>
+                    <p class="text-[var(--accent)] text-xs font-bold uppercase mb-8 tracking-widest uppercase">Redes & Contacto</p>
+                    <div class="flex gap-6">
+                        <a href="https://wa.me/51972321027" target="_blank" class="social-btn"><i class="fab fa-whatsapp text-2xl"></i></a>
+                        <a href="https://www.linkedin.com/in/fabrizioatalaya/" target="_blank" class="social-btn"><i class="fab fa-linkedin-in text-2xl"></i></a>
+                        <a href="https://www.facebook.com/fabrizioatalaya" target="_blank" class="social-btn"><i class="fab fa-facebook-f text-2xl"></i></a>
+                    </div>
                 </div>
                 <div class="md:w-1/4 flex flex-col gap-6 text-xs text-gray-500 uppercase tracking-widest font-bold">
                     <button onclick="switchPage('home')" class="text-left hover:text-white uppercase">Inicio</button>
-                    <button onclick="navigateToWork()" class="text-left hover:text-white uppercase">Portafolio</button>
                 </div>
             </div>
             <div class="mt-24 pt-8 border-t border-white/5 flex justify-between items-center text-[10px] text-gray-700 uppercase tracking-widest">
@@ -768,7 +766,6 @@
             }
         }
 
-        // Función para abrir proyectos aún sin contenido específico
         function openPlaceholder(title) {
             document.getElementById('placeholder-title').innerText = title;
             switchPage('project-generic');
@@ -776,7 +773,7 @@
 
         function switchPage(pageId, targetId = null) {
             const overlay = document.getElementById('transition-overlay');
-            const sections = ['page-home', 'page-services', 'page-project', 'page-about', 'page-project-redsatel', 'page-project-geosatelital', 'page-project-recamier', 'page-aprendo', 'page-project-credco', 'page-project-generic'];
+            const sections = ['page-home', 'page-project', 'page-about', 'page-project-redsatel', 'page-project-geosatelital', 'page-project-recamier', 'page-aprendo', 'page-project-credco', 'page-project-generic'];
             
             overlay.classList.remove('no-transition');
             overlay.classList.add('active');
@@ -830,7 +827,6 @@
             window.scrollTo(0,0);
         }
 
-        function openModal() { document.getElementById('quote-modal').classList.add('active'); }
         function closeModal() { document.getElementById('quote-modal').classList.remove('active'); }
 
         function submitForm(e) {
